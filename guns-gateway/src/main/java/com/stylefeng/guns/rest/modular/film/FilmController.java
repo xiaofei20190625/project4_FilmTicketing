@@ -11,26 +11,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/film")
 public class FilmController {
 
+    //首页接口：/film/getIndex
 
+    //影片条件列表查询接口：/film/getConditionList
 
-    ///film/getConditionListbrandId
+    //影片查询接口：/film/getFilms
 
-    @RequestMapping("/getConditionList")
-    @ResponseBody
-    public ConditionListResult getConditionList(int catId, int sourceId, int yearId ){
-
-        //调用服务
-
-         @Reference
-         FilmService service;
-
-        /*ArrayList<CatInfo> catInfos= service.getcatInfoByCatId(catId);
-        ArrayList<SourceInfo> sourceId= service.getsourceInfoByCatId(catId);
-        ArrayList<YearInfo> yearId= service.getyearInfoByCatId(catId);*/
-
-
-        return null;
-
-    }
+    //影片详情查询接口：/film/films/{影片编号或影片名称}
 
 }

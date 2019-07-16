@@ -8,7 +8,12 @@ import java.util.ArrayList;
 
 public interface FilmService {
 
-    ArrayList<CatInfo> getcatInfoByCatId(int catId);
-    ArrayList<SourceInfo>  getsourceInfoByCatId(int catId);
-    ArrayList<YearInfo> getyearInfoByCatId(int catId);
+    //首页接口
+
+    //影片条件列表查询接口
+
+    //影片查询接口
+
+    //影片详情查询接口
+
 }
