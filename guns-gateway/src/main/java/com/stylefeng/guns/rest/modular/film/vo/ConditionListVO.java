@@ -1,4 +1,4 @@
-package com.stylefeng.guns.rest.modular.film.VO;
+package com.stylefeng.guns.rest.modular.film.vo;
 
 import java.util.ArrayList;
 

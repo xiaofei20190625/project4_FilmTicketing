@@ -1,15 +1,11 @@
 package com.stylefeng.guns.rest.modular.film;
 
-import com.stylefeng.guns.rest.modular.film.VO.CatInfo;
-import com.stylefeng.guns.rest.modular.film.VO.ConditionListResult;
-import com.stylefeng.guns.rest.modular.film.VO.SourceInfo;
-import com.stylefeng.guns.rest.modular.film.VO.YearInfo;
+
+import com.stylefeng.guns.rest.modular.film.vo.ConditionListResult;
 import jdk.nashorn.internal.ir.annotations.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/film")
