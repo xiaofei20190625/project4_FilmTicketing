@@ -13,6 +13,10 @@
         <module>guns-core</module>
         <module>guns-rest</module>
         <module>guns-generator</module>
+        <module>guns-user</module>
+        <module>guns-cinema</module>
+        <module>guns-film</module>
+        <module>guns-common-api</module>
     </modules>
 
     <parent>
