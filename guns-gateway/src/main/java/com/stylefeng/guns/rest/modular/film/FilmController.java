@@ -5,6 +5,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.stylefeng.guns.rest.modular.film.model.*;
 import com.stylefeng.guns.rest.modular.film.vo.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +19,7 @@ public class FilmController {
     FilmService filmService;
 
     //首页接口：/film/getIndex
-    @RequestMapping("getIndex")
+    @GetMapping("getIndex")
     public IndexVo getIndexFilm(){
         IndexVo indexVo = new IndexVo();
         indexVo.setImgPre("http://img.meetingshop.cn/");
@@ -51,7 +52,7 @@ public class FilmController {
     }
 
     //影片条件列表查询接口：/film/getConditionList
-    @RequestMapping("getConditionList")
+    @GetMapping("getConditionList")
     public ConditionListVo getConditionList(int catId, int sourceId, int yearId){
         ConditionListVo conditionListVo = new ConditionListVo();
         conditionListVo.setStatus(0);

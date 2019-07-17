@@ -50,7 +50,6 @@ public class FilmServiceImpl implements FilmService {
         return banners;
     }
 
-    //--影片条件列表查询接口
     @Override
     public FilmVo<HotFilm> getIndexHotFilms() {
         List<MtimeFilmT> mtimeFilmInfoTList = filmTService.selectList(null);
@@ -196,7 +195,6 @@ public class FilmServiceImpl implements FilmService {
         }
         return yearInfos;
     }
-
 
     //影片查询接口
 
