@@ -19,9 +19,10 @@ public class DecryptTest {
         String salt = "pim1sk";
 
         SimpleObject simpleObject = new SimpleObject();
-        simpleObject.setUser("xiaofei");
+
+        simpleObject.setUser("stylefeng");
         simpleObject.setAge(12);
-        simpleObject.setName("hhhh");
+        simpleObject.setName("ffff");
         simpleObject.setTips("code");
 
         String jsonString = JSON.toJSONString(simpleObject);
