@@ -8,7 +8,8 @@ jwt:
   expiration: 604800      #7天 单位:秒
   auth-path: auth         #认证请求的路径
   md5-key: randomKey      #md5加密混淆key
-  noAuthUrl: /user/register
+  noAuthUrl: /film/getIndex,/film/getConditionList,/user/register
+
 
 
 server:
@@ -38,6 +39,7 @@ spring:
       username: root
       password: 123456
       filters: log4j,wall,mergeStat
+
 
 logging:
   level.root: info

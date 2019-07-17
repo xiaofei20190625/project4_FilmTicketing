@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.rest.modular.film.dao.MtimeFilmInfoTMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.rest.modular.film.model.MtimeFilmInfoT">
+        <id column="UUID" property="uuid" />
+        <result column="film_id" property="filmId" />
+        <result column="film_en_name" property="filmEnName" />
+        <result column="film_score" property="filmScore" />
+        <result column="film_score_num" property="filmScoreNum" />
+        <result column="film_length" property="filmLength" />
+        <result column="biography" property="biography" />
+        <result column="director_id" property="directorId" />
+        <result column="film_imgs" property="filmImgs" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        UUID, film_id, film_en_name, film_score, film_score_num, film_length, biography, director_id, film_imgs
+    </sql>
+
+</mapper>
