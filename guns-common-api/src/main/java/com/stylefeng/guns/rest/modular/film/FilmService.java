@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface FilmService {
     //首页接口
+
     //--获取banners
     List<Banner> getIndexBanners();
     //--获取热映影片
@@ -20,7 +21,11 @@ public interface FilmService {
     List<ExpectRanking> getIndexExpectRanking();
     //--获取top100
     List<Top100> getIndexTop100s();
+
     //影片条件列表查询接口
+    List<YearInfo> getYearInfo(int yearId);
+    List<CatInfo> getCatInfo(int catId);
+    List<SourceInfo> getSourceInfo(int sourceId);
 
     //影片查询接口
 

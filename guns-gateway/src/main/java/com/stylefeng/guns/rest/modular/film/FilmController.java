@@ -3,9 +3,7 @@ package com.stylefeng.guns.rest.modular.film;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.stylefeng.guns.rest.modular.film.model.*;
-import com.stylefeng.guns.rest.modular.film.vo.FilmIndexVo;
-import com.stylefeng.guns.rest.modular.film.vo.FilmVo;
-import com.stylefeng.guns.rest.modular.film.vo.IndexVo;
+import com.stylefeng.guns.rest.modular.film.vo.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,6 +51,21 @@ public class FilmController {
     }
 
     //影片条件列表查询接口：/film/getConditionList
+    @RequestMapping("getConditionList")
+    public ConditionListVo getConditionList(int catId, int sourceId, int yearId){
+        ConditionListVo conditionListVo = new ConditionListVo();
+        conditionListVo.setStatus(0);
+        conditionListVo.setMsg("");
+        conditionListVo.setImgPre("");
+        List<CatInfo> catInfos = filmService.getCatInfo(catId);
+        List<SourceInfo> sourceInfos = filmService.getSourceInfo(sourceId);
+        List<YearInfo> yearInfos = filmService.getYearInfo(yearId);
+
+        conditionListVo.setCatInfo(catInfos);
+        conditionListVo.setSourceInfo(sourceInfos);
+        conditionListVo.setYearInfo(yearInfos);
+        return conditionListVo;
+    }
 
     //影片查询接口：/film/getFilms
 

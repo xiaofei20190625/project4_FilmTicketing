@@ -5,12 +5,9 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.rest.modular.film.FilmService;
 import com.stylefeng.guns.rest.modular.film.model.*;
-import com.stylefeng.guns.rest.modular.film.service.IMtimeBannerTService;
-import com.stylefeng.guns.rest.modular.film.service.IMtimeFilmInfoTService;
-import com.stylefeng.guns.rest.modular.film.service.IMtimeFilmTService;
+import com.stylefeng.guns.rest.modular.film.service.*;
 import com.stylefeng.guns.rest.modular.film.util.DataForgeryUtil;
-import com.stylefeng.guns.rest.modular.film.vo.FilmIndexVo;
-import com.stylefeng.guns.rest.modular.film.vo.FilmVo;
+import com.stylefeng.guns.rest.modular.film.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -29,6 +26,12 @@ public class FilmServiceImpl implements FilmService {
     IMtimeFilmTService filmTService;
     @Autowired
     IMtimeFilmInfoTService filmInfoTService;
+    @Autowired
+    IMtimeCatDictTService catDictTService;
+    @Autowired
+    IMtimeSourceDictTService sourceDictTService;
+    @Autowired
+    IMtimeYearDictTService yearDictTService;
     //首页接口
     //--获取首页banner信息
     @Override
@@ -47,7 +50,7 @@ public class FilmServiceImpl implements FilmService {
         return banners;
     }
 
-    //--获取首页热门影片信息
+    //--影片条件列表查询接口
     @Override
     public FilmVo<HotFilm> getIndexHotFilms() {
         List<MtimeFilmT> mtimeFilmInfoTList = filmTService.selectList(null);
@@ -136,8 +139,64 @@ public class FilmServiceImpl implements FilmService {
         return top100s;
     }
 
+    //--获取电影的分类信息
+    @Override
+    public List<CatInfo> getCatInfo(int catId) {
+        List<MtimeCatDictT> mtimeCatDictTS = catDictTService.selectList(null);
 
-    //影片条件列表查询接口
+        List<CatInfo> catInfos = new ArrayList<>();
+        for (MtimeCatDictT c : mtimeCatDictTS){
+            CatInfo catInfo = new CatInfo();
+            if (catId == c.getUuid()){
+                catInfo.setActive(true);
+            }else {
+                catInfo.setActive(false);
+            }
+            catInfo.setCatId(c.getUuid());
+            catInfo.setCatName(c.getShowName());
+            catInfos.add(catInfo);
+        }
+        return catInfos;
+    }
+
+    @Override
+    public List<SourceInfo> getSourceInfo(int sourceId) {
+        List<MtimeSourceDictT> mtimeSourceDictTS = sourceDictTService.selectList(null);
+
+        List<SourceInfo> sourceInfos = new ArrayList<>();
+        for (MtimeSourceDictT s : mtimeSourceDictTS){
+            SourceInfo sourceInfo = new SourceInfo();
+            if (sourceId == s.getUuid()){
+                sourceInfo.setActive(true);
+            }else {
+                sourceInfo.setActive(false);
+            }
+            sourceInfo.setSourceId(s.getUuid());
+            sourceInfo.setSourceName(s.getShowName());
+            sourceInfos.add(sourceInfo);
+        }
+        return sourceInfos;
+    }
+
+    @Override
+    public List<YearInfo> getYearInfo(int yearId) {
+        List<MtimeYearDictT> mtimeYearDictTS = yearDictTService.selectList(null);
+
+        List<YearInfo> yearInfos = new ArrayList<>();
+        for (MtimeYearDictT y : mtimeYearDictTS){
+            YearInfo yearInfo = new YearInfo();
+            if (yearId == y.getUuid()){
+                yearInfo.setActive(true);
+            }else {
+                yearInfo.setActive(false);
+            }
+            yearInfo.setYearId(y.getUuid());
+            yearInfo.setYearName(y.getShowName());
+            yearInfos.add(yearInfo);
+        }
+        return yearInfos;
+    }
+
 
     //影片查询接口
 
