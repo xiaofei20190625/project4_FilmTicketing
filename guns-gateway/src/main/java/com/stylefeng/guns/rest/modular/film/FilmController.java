@@ -9,10 +9,11 @@ import com.stylefeng.guns.rest.modular.film.vo.IndexVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/film")
 public class FilmController {
     @Reference
@@ -20,7 +21,6 @@ public class FilmController {
 
     //首页接口：/film/getIndex
     @RequestMapping("getIndex")
-    @ResponseBody
     public IndexVo getIndexFilm(){
         IndexVo indexVo = new IndexVo();
         indexVo.setImgPre("http://img.meetingshop.cn/");
@@ -35,19 +35,19 @@ public class FilmController {
 
     private FilmIndexVo getIndexFilmElements() {
         List<Banner> banners = filmService.getIndexBanners();
-//        FilmVo<HotFilm> hotFilms = filmService.getIndexHotFilms();
-//        FilmVo<SoonFilm> soonFilms = filmService.getIndexSoonFilms();
-//        List<BoxRanking> boxRanking = filmService.getIndexBoxRanking();
-//        List<ExpectRanking> expectRanking = filmService.getIndexExpectRanking();
-//        List<Top100> top100 = filmService.getIndexTop100s();
+        FilmVo<HotFilm> hotFilms = filmService.getIndexHotFilms();
+        FilmVo<SoonFilm> soonFilms = filmService.getIndexSoonFilms();
+        List<BoxRanking> boxRanking = filmService.getIndexBoxRanking();
+        List<ExpectRanking> expectRanking = filmService.getIndexExpectRanking();
+        List<Top100> top100 = filmService.getIndexTop100s();
 
         FilmIndexVo filmIndexVo = new FilmIndexVo();
         filmIndexVo.setBanners(banners);
-//        filmIndexVo.setHotFilms(hotFilms);
-//        filmIndexVo.setSoonFilms(soonFilms);
-//        filmIndexVo.setBoxRanking(boxRanking);
-//        filmIndexVo.setExpectRanking(expectRanking);
-//        filmIndexVo.setTop100(top100);
+        filmIndexVo.setHotFilms(hotFilms);
+        filmIndexVo.setSoonFilms(soonFilms);
+        filmIndexVo.setBoxRanking(boxRanking);
+        filmIndexVo.setExpectRanking(expectRanking);
+        filmIndexVo.setTop100(top100);
 
         return filmIndexVo;
     }
