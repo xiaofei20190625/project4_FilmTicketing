@@ -44,6 +44,12 @@ public class AuthFilter extends OncePerRequestFilter {
         String noAuthUrls = jwtProperties.getNoAuthUrl();
         String[] noAuthUrl = noAuthUrls.split(",");
         //直接放行
+        for (String s : noAuthUrl) {
+            if (request.getServletPath().equals(s)) {
+                chain.doFilter(request, response);
+                return;
+            }
+        }
 
 
         final String requestHeader = request.getHeader(jwtProperties.getHeader());
