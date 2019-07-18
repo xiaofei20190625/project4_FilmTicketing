@@ -7,6 +7,8 @@ import java.io.Serializable;
  * Date 2019/7/16 Time 17:09
  */
 public class IndexVo implements Serializable {
+    private static final long serialVersionUID = 1210191022404154639L;
+
     private int status;
 
     private String imgPre;

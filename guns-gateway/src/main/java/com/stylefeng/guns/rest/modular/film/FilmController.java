@@ -4,23 +4,22 @@ package com.stylefeng.guns.rest.modular.film;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.stylefeng.guns.rest.modular.film.model.*;
 import com.stylefeng.guns.rest.modular.film.vo.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/film")
+@Slf4j
 public class FilmController {
-    @Reference
+    @Reference(interfaceClass = FilmService.class, check = true)
     FilmService filmService;
 
     //首页接口：/film/getIndex
-    @GetMapping("getIndex")
-    public IndexVo getIndexFilm(){
+    @RequestMapping(value = "getIndex", method = RequestMethod.GET)
+    public Object getIndexFilm(){
         IndexVo indexVo = new IndexVo();
         indexVo.setImgPre("http://img.meetingshop.cn/");
         FilmIndexVo data = getIndexFilmElements();
@@ -34,11 +33,11 @@ public class FilmController {
 
     private FilmIndexVo getIndexFilmElements() {
         List<Banner> banners = filmService.getIndexBanners();
-        FilmVo<HotFilm> hotFilms = filmService.getIndexHotFilms();
-        FilmVo<SoonFilm> soonFilms = filmService.getIndexSoonFilms();
-        List<BoxRanking> boxRanking = filmService.getIndexBoxRanking();
-        List<ExpectRanking> expectRanking = filmService.getIndexExpectRanking();
-        List<Top100> top100 = filmService.getIndexTop100s();
+        FilmVo<HotFilm> hotFilms = filmService.getIndexHotFilms(8, true);
+        FilmVo<SoonFilm> soonFilms = filmService.getIndexSoonFilms(8, true);
+        List<BoxRanking> boxRanking = filmService.getIndexBoxRanking(10);
+        List<ExpectRanking> expectRanking = filmService.getIndexExpectRanking(10);
+        List<Top100> top100 = filmService.getIndexTop100s(7);
 
         FilmIndexVo filmIndexVo = new FilmIndexVo();
         filmIndexVo.setBanners(banners);
@@ -52,8 +51,8 @@ public class FilmController {
     }
 
     //影片条件列表查询接口：/film/getConditionList
-    @GetMapping("getConditionList")
-    public ConditionListVo getConditionList(int catId, int sourceId, int yearId){
+    @RequestMapping(value = "getConditionList", method = RequestMethod.GET)
+    public Object getConditionList(int catId, int sourceId, int yearId){
         ConditionListVo conditionListVo = new ConditionListVo();
         conditionListVo.setStatus(0);
         conditionListVo.setMsg("");

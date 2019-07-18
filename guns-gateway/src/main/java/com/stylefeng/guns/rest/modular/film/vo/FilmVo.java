@@ -8,6 +8,8 @@ import java.util.List;
  * Date 2019/7/15 Time 22:22
  */
 public class FilmVo<T> implements Serializable {
+    private static final long serialVersionUID = 7660600729298688090L;
+
     private int filmNum;
 
     private List<T> filmInfo;

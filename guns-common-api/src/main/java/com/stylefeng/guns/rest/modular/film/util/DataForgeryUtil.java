@@ -24,7 +24,7 @@ public class DataForgeryUtil {
     public static Date getRandomShowTime(){
         Random random = new Random();
         int seconds = random.nextInt(30 * 24 * 60 * 60);
-        long milis = seconds * 1000 + new Date().getTime();
+        long milis = 1000L * seconds + new Date().getTime();
         Date showTime = new Date(milis);
         return showTime;
     }

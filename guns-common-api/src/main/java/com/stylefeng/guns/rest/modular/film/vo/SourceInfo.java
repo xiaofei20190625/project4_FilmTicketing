@@ -3,6 +3,8 @@ package com.stylefeng.guns.rest.modular.film.vo;
 import java.io.Serializable;
 
 public class SourceInfo implements Serializable {
+    private static final long serialVersionUID = 2633373681979500672L;
+
     private Boolean active;
 
     private Integer sourceId;

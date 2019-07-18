@@ -3,6 +3,8 @@ package com.stylefeng.guns.rest.modular.film.vo;
 import java.io.Serializable;
 
 public class YearInfo implements Serializable {
+    private static final long serialVersionUID = 1383151251093583228L;
+
     private Boolean active;
 
     private Integer yearId;

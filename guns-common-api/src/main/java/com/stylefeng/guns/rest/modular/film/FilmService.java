@@ -12,15 +12,15 @@ public interface FilmService {
     //--获取banners
     List<Banner> getIndexBanners();
     //--获取热映影片
-    FilmVo<HotFilm> getIndexHotFilms();
+    FilmVo<HotFilm> getIndexHotFilms(Integer count, Boolean isLimit);
     //--获取即将上映影片
-    FilmVo<SoonFilm> getIndexSoonFilms();
+    FilmVo<SoonFilm> getIndexSoonFilms(Integer count, Boolean isLimit);
     //获取票房排行榜
-    List<BoxRanking> getIndexBoxRanking();
+    List<BoxRanking> getIndexBoxRanking(Integer count);
     //--获取人气排行榜
-    List<ExpectRanking> getIndexExpectRanking();
+    List<ExpectRanking> getIndexExpectRanking(Integer count);
     //--获取top100
-    List<Top100> getIndexTop100s();
+    List<Top100> getIndexTop100s(Integer count);
 
     //影片条件列表查询接口
     List<YearInfo> getYearInfo(int yearId);

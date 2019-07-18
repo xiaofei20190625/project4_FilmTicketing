@@ -7,6 +7,8 @@ import java.io.Serializable;
  * Date 2019/7/15 Time 21:59
  */
 public class ResponseVo implements Serializable {
+    private static final long serialVersionUID = -1594901999968321760L;
+
     private Integer status;
 
     private String msg;

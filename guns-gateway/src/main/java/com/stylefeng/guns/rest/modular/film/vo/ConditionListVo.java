@@ -8,6 +8,8 @@ import java.util.List;
  * Date 2019/7/17 Time 17:13
  */
 public class ConditionListVo implements Serializable {
+    private static final long serialVersionUID = 5205236808844659686L;
+
     private List<CatInfo> catInfo;
 
     private List<SourceInfo> sourceInfo;

@@ -3,6 +3,8 @@ package com.stylefeng.guns.rest.modular.film.vo;
 import java.io.Serializable;
 
 public class CatInfo implements Serializable {
+    private static final long serialVersionUID = 5439880444913623339L;
+
     private Boolean active;
 
     private Integer catId;
