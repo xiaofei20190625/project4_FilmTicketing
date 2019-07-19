@@ -51,6 +51,13 @@ public class AuthFilter extends OncePerRequestFilter {
             }
         }
 
+        for (String noAuth : noAuthUrl){
+            if (request.getServletPath().equals(noAuth)){
+                chain.doFilter(request, response);
+                return;
+            }
+        }
+
 
         final String requestHeader = request.getHeader(jwtProperties.getHeader());
         String authToken = null;

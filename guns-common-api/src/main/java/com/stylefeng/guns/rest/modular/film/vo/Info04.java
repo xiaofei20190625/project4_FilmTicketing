@@ -10,20 +10,17 @@ public class Info04 implements Serializable {
 
     private FilmActors actors;
 
-    public String getBiography() {
-        return biography;
+    private ImgVO imgVO;
+
+    private String filmId;
+
+    public Info04() {
     }
 
-    public void setBiography(String biography) {
+    public Info04(String biography, FilmActors actors, ImgVO imgVO, String filmId) {
         this.biography = biography;
-    }
-
-    public FilmActors getActors() {
-        return actors;
-    }
-
-    public void setActors(FilmActors actors) {
         this.actors = actors;
+        this.imgVO = imgVO;
+        this.filmId = filmId;
     }
-
 }

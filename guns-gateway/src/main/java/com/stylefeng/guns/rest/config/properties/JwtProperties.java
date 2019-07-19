@@ -25,7 +25,7 @@ public class JwtProperties {
 
     private String md5Key = "randomKey";
 
-    private String noAuthUrl="";
+    private String noAuthUrl= "";
 
     public String getNoAuthUrl() {
         return noAuthUrl;

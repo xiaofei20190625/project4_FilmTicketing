@@ -18,6 +18,7 @@
         <module>guns-film</module>
         <module>guns-common-api</module>
         <module>guns-gateway</module>
+        <module>guns-order</module>
     </modules>
 
     <parent>
@@ -169,6 +170,11 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>1.7.25</version>
             </dependency>
 
 

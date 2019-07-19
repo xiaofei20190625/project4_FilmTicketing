@@ -25,14 +25,12 @@ public class FilmDetailVO implements Serializable {
 
     private Info04 info04;
 
-    private ImgVO imgVO;
-
     private Integer filmId;
 
     public FilmDetailVO() {
     }
 
-    public FilmDetailVO(String filmName, String filmEnName, String imgAddress, String score, String scoreNum, String totalBox, String info01, String info02, String info03, Info04 info04, ImgVO imgVO, Integer filmId) {
+    public FilmDetailVO(String filmName, String filmEnName, String imgAddress, String score, String scoreNum, String totalBox, String info01, String info02, String info03, Info04 info04, Integer filmId) {
         this.filmName = filmName;
         this.filmEnName = filmEnName;
         this.imgAddress = imgAddress;
@@ -43,7 +41,6 @@ public class FilmDetailVO implements Serializable {
         this.info02 = info02;
         this.info03 = info03;
         this.info04 = info04;
-        this.imgVO = imgVO;
         this.filmId = filmId;
     }
 }
