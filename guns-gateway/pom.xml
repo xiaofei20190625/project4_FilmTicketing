@@ -27,7 +27,6 @@
             <artifactId>guns-common-api</artifactId>
             <version>1.0.0</version>
         </dependency>
-
         <dependency>
             <groupId>com.alibaba.spring.boot</groupId>
             <artifactId>dubbo-spring-boot-starter</artifactId>
