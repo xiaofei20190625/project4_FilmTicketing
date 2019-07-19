@@ -27,6 +27,7 @@ public class CinemaController {
     @Reference(interfaceClass = CinemaServiceAPI.class, check = false)
     CinemaServiceAPI cinemaService;
 
+    ///cinema/getCinemas? brandId=30227&districtId=14&hallType=2
     @RequestMapping(value = "/getCinemas", method = RequestMethod.GET)
     public Object getCinemas(CinemaQueryVo cinemaQueryVo ) {
         //String brandId ,  String districtId ,String hallType,  String  pageSize ,String nowPage
@@ -52,13 +53,18 @@ public class CinemaController {
 
     }
 
+    ///cinema/getCondition
+
+
+    ///cinema/getFields
     @RequestMapping(value = "getFields",method = {RequestMethod.GET , RequestMethod.POST})
     public Object getFields(int cinemaId){
-/*        CinemaInfo cinemaInfo = cinemaService.getFields(cinemaId);
-        List<FilmList> filmList = cinemaService.getFilmList(cinemaId);*/
+        CinemaInfo cinemaInfo = cinemaService.getFields(cinemaId);
+        List<FilmList> filmList = cinemaService.getFilmList(cinemaId);
 
         return  null;
     }
 
 
+    ///cinema/getFieldInfo
 }
