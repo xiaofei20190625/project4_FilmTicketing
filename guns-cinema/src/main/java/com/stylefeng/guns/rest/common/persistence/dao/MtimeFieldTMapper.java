@@ -2,6 +2,7 @@ package com.stylefeng.guns.rest.common.persistence.dao;
 
 import com.stylefeng.guns.rest.common.persistence.model.MtimeFieldT;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.stylefeng.guns.rest.modular.cinema.vo.FilmList;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -17,4 +18,6 @@ import java.util.List;
 public interface MtimeFieldTMapper extends BaseMapper<MtimeFieldT> {
 
     List<MtimeFieldT>  selectByCinemaId(@Param("cinemaId") int cinemaId);
+
+    List<FilmList> getFilmList(@Param("cinemaId") int cinemaId);
 }

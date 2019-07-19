@@ -5,8 +5,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.rest.common.persistence.model.MtimeCinemaT;
 import com.stylefeng.guns.rest.modular.cinema.service.IMtimeCinemaTService;
 import com.stylefeng.guns.rest.modular.cinema.vo.CinemaQueryVo;
-import com.stylefeng.guns.rest.modular.cinema.vo.CinemaResponseVo;
-import com.stylefeng.guns.rest.modular.cinema.vo.CinemaVo;
+import com.stylefeng.guns.rest.modular.cinema.util.CinemaResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 

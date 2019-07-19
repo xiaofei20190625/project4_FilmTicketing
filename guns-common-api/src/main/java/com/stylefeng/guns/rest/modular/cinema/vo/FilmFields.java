@@ -11,15 +11,16 @@ import java.io.Serializable;
  * @date 2019/7/17 21:39
  * @Description TODO
  */
+@Data
 public class FilmFields implements Serializable {
-
     private  Integer fieldId ;
     private  String  beginTime  ;
+    private  String endTime;
     private  String language;
     private  String hallName;
     private  Integer price;
 
-    public Integer getFieldId() {
+/*    public Integer getFieldId() {
         return fieldId;
     }
 
@@ -57,5 +58,5 @@ public class FilmFields implements Serializable {
 
     public void setPrice(Integer price) {
         this.price = price;
-    }
+    }*/
 }

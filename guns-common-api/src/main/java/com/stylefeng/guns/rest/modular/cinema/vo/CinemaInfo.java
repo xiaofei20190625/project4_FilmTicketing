@@ -1,5 +1,7 @@
 package com.stylefeng.guns.rest.modular.cinema.vo;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -7,10 +9,10 @@ import java.io.Serializable;
  * @date 2019/7/17 21:30
  * @Description TODO
  */
-
+@Data
 public class CinemaInfo implements Serializable {
     private  Integer cinemaId;
-    private  String imgUrl;
+    private  String imgUrl = "cinema6.jpg";
     private  String cinemaName;
     private  String cinemaAdress;
     private String cinemaPhone;
@@ -25,7 +27,7 @@ public class CinemaInfo implements Serializable {
         this.cinemaAdress = cinemaAdress;
         this.cinemaPhone = cinemaPhone;
     }
-
+/*
     public Integer getCinemaId() {
         return cinemaId;
     }
@@ -64,5 +66,5 @@ public class CinemaInfo implements Serializable {
 
     public void setCinemaPhone(String cinemaPhone) {
         this.cinemaPhone = cinemaPhone;
-    }
+    }*/
 }

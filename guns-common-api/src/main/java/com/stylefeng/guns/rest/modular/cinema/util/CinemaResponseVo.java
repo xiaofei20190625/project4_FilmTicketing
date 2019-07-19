@@ -1,4 +1,4 @@
-package com.stylefeng.guns.rest.modular.cinema.vo;
+package com.stylefeng.guns.rest.modular.cinema.util;
 
 import lombok.Data;
 
@@ -11,11 +11,12 @@ import java.io.Serializable;
  */
 @Data
 public class CinemaResponseVo implements Serializable {
-    private  Integer status ;
-    private  Integer nowPage;
-    private  Integer totalPage;
-    private  Object data;
-    private  String msg;
+private  Integer status = 0 ;
+private  Integer nowPage;
+private  Integer totalPage;
+private  Object data;
+private  String msg = "";
+private  String imgPre = "http://img.meetingshop.cn/";
 
     public static CinemaResponseVo ok(Object data , int nowPage , int totalPage){
         CinemaResponseVo cinemaVo = new CinemaResponseVo();
