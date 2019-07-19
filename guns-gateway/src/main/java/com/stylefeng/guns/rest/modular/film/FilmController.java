@@ -4,6 +4,7 @@ package com.stylefeng.guns.rest.modular.film;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.stylefeng.guns.rest.modular.film.model.*;
 import com.stylefeng.guns.rest.modular.film.vo.*;
+import com.stylefeng.guns.rest.modular.vo.ResponseVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +25,6 @@ public class FilmController {
         indexVo.setImgPre("http://img.meetingshop.cn/");
         FilmIndexVo data = getIndexFilmElements();
         indexVo.setData(data);
-        if (data == null){
-            indexVo.setStatus(1);
-        }
         indexVo.setStatus(0);
         return indexVo;
     }
@@ -53,18 +51,15 @@ public class FilmController {
     //影片条件列表查询接口：/film/getConditionList
     @RequestMapping(value = "getConditionList", method = RequestMethod.GET)
     public Object getConditionList(int catId, int sourceId, int yearId){
-        ConditionListVo conditionListVo = new ConditionListVo();
-        conditionListVo.setStatus(0);
-        conditionListVo.setMsg("");
-        conditionListVo.setImgPre("");
+        ConditionVo conditionVo = new ConditionVo();
         List<CatInfo> catInfos = filmService.getCatInfo(catId);
         List<SourceInfo> sourceInfos = filmService.getSourceInfo(sourceId);
         List<YearInfo> yearInfos = filmService.getYearInfo(yearId);
-
-        conditionListVo.setCatInfo(catInfos);
-        conditionListVo.setSourceInfo(sourceInfos);
-        conditionListVo.setYearInfo(yearInfos);
-        return conditionListVo;
+        conditionVo.setCatInfo(catInfos);
+        conditionVo.setSourceInfo(sourceInfos);
+        conditionVo.setYearInfo(yearInfos);
+        ResponseVo responseVo = ResponseVo.ok(conditionVo, "");
+        return responseVo;
     }
 
     //影片查询接口：/film/getFilms
