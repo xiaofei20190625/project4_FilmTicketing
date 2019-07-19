@@ -8,12 +8,11 @@ jwt:
   expiration: 604800      #7天 单位:秒
   auth-path: auth         #认证请求的路径
   md5-key: randomKey      #md5加密混淆key
-  noAuthUrl: /film/getIndex,/film/getConditionList,/user/register
-
+  noAuthUrl: /film/getIndex,/film/getConditionList,/user/register,/film/getFilms
 
 
 server:
-  port: 8085 #项目端口
+  port: 8080 #项目端口
 
 mybatis-plus:
   mapper-locations: classpath*:com/stylefeng/guns/rest/**/mapping/*.xml

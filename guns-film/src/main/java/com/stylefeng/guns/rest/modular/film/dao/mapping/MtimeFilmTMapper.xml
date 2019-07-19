@@ -24,4 +24,11 @@
         UUID, film_name, film_type, img_address, film_score, film_preSaleNum, film_box_office, film_source, film_cats, film_area, film_date, film_time, film_status
     </sql>
 
+    <select id="selectByName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from mtime_film_t
+        where film_name=#{filmName}
+    </select>
+
 </mapper>
