@@ -3,6 +3,7 @@ package com.stylefeng.guns.rest.modular.film;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.stylefeng.guns.rest.modular.film.model.GetFilmCondition;
+import com.stylefeng.guns.rest.modular.film.vo.ConditionVo;
 import com.stylefeng.guns.rest.modular.film.vo.FilmDetailVO;
 import com.stylefeng.guns.rest.modular.film.vo.GetFilmVO;
 import com.stylefeng.guns.rest.modular.film.vo.ResponseVO1;
