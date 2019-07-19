@@ -19,5 +19,11 @@
     <sql id="Base_Column_List">
         UUID, film_id, film_en_name, film_score, film_score_num, film_length, biography, director_id, film_imgs
     </sql>
+    <select id="selectByFilmId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from mtime_film_info_t
+        where film_id=#{filmId}
+    </select>
 
 </mapper>

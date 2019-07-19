@@ -1,10 +1,10 @@
 package com.stylefeng.guns.rest.modular.film;
 
-import com.stylefeng.guns.rest.modular.film.vo.CatInfo;
-import com.stylefeng.guns.rest.modular.film.vo.SourceInfo;
-import com.stylefeng.guns.rest.modular.film.vo.YearInfo;
+import com.stylefeng.guns.rest.modular.film.model.GetFilmCondition;
+import com.stylefeng.guns.rest.modular.film.vo.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface FilmService {
 
@@ -13,7 +13,13 @@ public interface FilmService {
     //影片条件列表查询接口
 
     //影片查询接口
+    GetFilmVO getFilmVO(GetFilmCondition getFilmCondition);
 
     //影片详情查询接口
+    FilmDetailVO getFilmDetail(Integer searchType , String searchValue);
+
+
+
+
 
 }

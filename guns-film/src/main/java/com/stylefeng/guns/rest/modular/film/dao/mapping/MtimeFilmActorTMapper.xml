@@ -10,9 +10,27 @@
         <result column="role_name" property="roleName" />
     </resultMap>
 
+    <resultMap id="ActorMap" type="com.stylefeng.guns.rest.modular.film.vo.Actor">
+        <result column="role_name" property="roleName" />
+        <result column="actor_name" property="directorName" />
+        <result column="actor_img" property="imgAddress" />
+    </resultMap>
+
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         UUID, film_id, actor_id, role_name
     </sql>
+    <select id="selectByAId" resultMap="ActorMap">
+        SELECT a.role_name,b.actor_name,b.actor_img
+        from mtime_film_actor_t a
+        LEFT JOIN mtime_actor_t b on a.actor_id=b.UUID
+        where a.actor_id=#{actorId}
+    </select>
+    <select id="selectByFilmId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from mtime_film_actor_t
+        where film_id=#{filmId}
+    </select>
 
 </mapper>
