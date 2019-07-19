@@ -5,6 +5,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.stylefeng.guns.rest.modular.film.model.*;
 import com.stylefeng.guns.rest.modular.film.vo.*;
 import com.stylefeng.guns.rest.modular.vo.ResponseVo;
+import com.stylefeng.guns.rest.modular.film.vo.IndexVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
