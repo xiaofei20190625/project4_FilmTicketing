@@ -25,18 +25,6 @@ import java.util.List;
 @Component
 @Service(interfaceClass = FilmService.class)
 public class FilmServiceImpl implements FilmService {
-//    @Autowired
-//    private IMtimeBannerTService bannerTService;
-//    @Autowired
-//    private IMtimeFilmTService filmTService;
-//    @Autowired
-//    private IMtimeFilmInfoTService filmInfoTService;
-//    @Autowired
-//    private IMtimeCatDictTService catDictTService;
-//    @Autowired
-//    private IMtimeSourceDictTService sourceDictTService;
-//    @Autowired
-//    private IMtimeYearDictTService yearDictTService;
 
     @Autowired
     private MtimeBannerTMapper bannerTMapper;
