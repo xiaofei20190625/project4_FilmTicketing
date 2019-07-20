@@ -12,5 +12,13 @@
     <sql id="Base_Column_List">
         UUID, show_name
     </sql>
+    <select id="selectByIds" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from mtime_cat_dict_t where UUID in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
 
 </mapper>

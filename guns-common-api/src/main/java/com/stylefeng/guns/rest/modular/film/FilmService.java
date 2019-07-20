@@ -1,5 +1,6 @@
 package com.stylefeng.guns.rest.modular.film;
 
+import com.stylefeng.guns.rest.modular.film.model.GetFilmCondition;
 import com.stylefeng.guns.rest.modular.film.model.*;
 import com.stylefeng.guns.rest.modular.film.vo.*;
 
@@ -74,7 +75,13 @@ public interface FilmService {
     List<SourceInfo> getSourceInfo(int sourceId);
 
     //影片查询接口
+    GetFilmVO getFilmVO(GetFilmCondition getFilmCondition);
 
     //影片详情查询接口
+    FilmDetailVO getFilmDetail(Integer searchType , String searchValue);
+
+
+
+
 
 }

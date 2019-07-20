@@ -8,7 +8,7 @@
     <version>0.0.1</version>
     <packaging>jar</packaging>
 
-    <name>guns-rest</name>
+    <name>guns-oder</name>
     <description>guns order服务器</description>
 
     <parent>

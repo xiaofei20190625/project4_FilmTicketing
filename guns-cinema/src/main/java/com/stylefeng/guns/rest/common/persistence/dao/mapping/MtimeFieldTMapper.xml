@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.rest.common.persistence.dao.MtimeFieldTMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.rest.common.persistence.model.MtimeFieldT">
+        <id column="UUID" property="uuid" />
+        <result column="cinema_id" property="cinemaId" />
+        <result column="film_id" property="filmId" />
+        <result column="begin_time" property="beginTime" />
+        <result column="end_time" property="endTime" />
+        <result column="hall_id" property="hallId" />
+        <result column="hall_name" property="hallName" />
+        <result column="price" property="price" />
+    </resultMap>
+
+    <resultMap id="FilmAndFieldMap" type="com.stylefeng.guns.rest.modular.cinema.vo.FilmList">
+        <result column="film_id" property="filmId" />
+        <result column="film_name" property="filmName" />
+        <result column="film_language" property="filmType" />
+        <result column="film_cats" property="filmCats" />
+        <result column="actors" property="actors" />
+        <result column="img_address" property="imgAddress" />
+        <result column="film_length" property="filmLength" />
+        <collection property="filmFields" ofType="com.stylefeng.guns.rest.modular.cinema.vo.FilmFields">
+            <result column="UUID" property="fieldId" />
+            <result column="begin_time" property="beginTime" />
+            <result column="end_time" property="endTime" />
+            <result column="film_language" property="language" />
+            <result column="hall_name" property="hallName" />
+            <result column="price" property="price" />
+        </collection>
+    </resultMap>
+    <!--selectByCinemaId-->
+    <select id="selectByCinemaId" resultMap="BaseResultMap">
+        SELECT UUID ,begin_time,hall_name,price,film_id FROM guns_rest.mtime_field_t where cinema_id =#{cinemaId};
+    </select>
+
+    <!--getFilmList-->
+    <select id="getFilmList" parameterType="_int" resultMap="FilmAndFieldMap">
+        SELECT
+            info.film_id,
+            info.img_address,
+            info.film_name,
+            info.film_length,
+            info.film_language,
+            info.film_cats,
+            info.actors,
+            f.hall_name,
+            f.UUID,
+            f.price,
+            f.begin_time,
+            f.end_time
+        FROM mtime_hall_film_info_t info
+                 left JOIN mtime_field_t f
+                           on info.film_id = f.film_id
+                               and f.cinema_id = #{cinemaId};
+    </select>
+</mapper>
