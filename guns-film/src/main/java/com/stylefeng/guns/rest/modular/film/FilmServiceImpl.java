@@ -381,6 +381,15 @@ public class FilmServiceImpl implements FilmService {
         return filmDetailVO;
     }
 
+    @Override
+    public String getFilmById(Integer filmNameId) {
+        MtimeFilmT mtimeFilmT = new MtimeFilmT();
+        mtimeFilmT.setUuid(filmNameId);
+        MtimeFilmT mtimeFilmT1 = filmTMapper.selectOne(mtimeFilmT);
+        String filmName = mtimeFilmT1.getFilmName();
+        return filmName;
+    }
+
     private Info04 getInfo04(MtimeFilmInfoT filmInfo) {
         String filmId = filmInfo.getFilmId();
         Integer directorId = filmInfo.getDirectorId();
