@@ -21,7 +21,9 @@ public class OrderController {
     @RequestMapping(value = "buyTickets", params = {"fieldId", "soldSeats", "seatsName"})
     public ResponseVo buyTickets(String fieldId, String soldSeats, String seatsName){
         Boolean isTrueSeats = orderService.isTrueSeats(fieldId, soldSeats);
-        return null;
+        System.out.println(isTrueSeats);
+        ResponseVo responseVo = new ResponseVo();
+        return responseVo;
     }
 
 }

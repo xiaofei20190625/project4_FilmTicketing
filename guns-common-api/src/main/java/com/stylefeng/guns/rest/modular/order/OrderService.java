@@ -7,9 +7,9 @@ package com.stylefeng.guns.rest.modular.order;
 public interface OrderService {
     /**
      * 判断座位信息是否有效
-     * @param filedId
+     * @param fieldId
      * @param seatId
      * @return
      */
-    Boolean isTrueSeats(String filedId, String seatId);
+    Boolean isTrueSeats(String fieldId, String seatId);
 }
