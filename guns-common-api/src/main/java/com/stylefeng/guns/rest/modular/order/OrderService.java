@@ -12,4 +12,6 @@ public interface OrderService {
      * @return
      */
     Boolean isTrueSeats(String filedId, String seatId);
+
+    String selectSoldSeats(int fieldId);
 }
