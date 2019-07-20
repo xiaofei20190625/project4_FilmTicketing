@@ -2,6 +2,7 @@ package com.stylefeng.guns.rest.modular.order.dao;
 
 import com.stylefeng.guns.rest.modular.order.model.MoocOrderT;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  */
 public interface MoocOrderTMapper extends BaseMapper<MoocOrderT> {
 
+    String selectSoldSeatsByFieldId(@Param("fieldId") int fieldId);
 }

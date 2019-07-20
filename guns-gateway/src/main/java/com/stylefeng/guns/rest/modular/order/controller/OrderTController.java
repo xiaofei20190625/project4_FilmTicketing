@@ -7,12 +7,17 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.stylefeng.guns.rest.config.properties.JwtProperties;
 import com.stylefeng.guns.rest.modular.auth.util.JwtTokenUtil;
+import com.stylefeng.guns.rest.modular.cinema.CinemaServiceAPI;
+import com.stylefeng.guns.rest.modular.cinema.vo.CinemaInfo;
+import com.stylefeng.guns.rest.modular.film.FilmService;
+import com.stylefeng.guns.rest.modular.film.model.GetFilmCondition;
 import com.stylefeng.guns.rest.modular.order.service.IOrderTService;
 import com.stylefeng.guns.rest.modular.order.vo.NewOrderTInfo;
 import com.stylefeng.guns.rest.modular.order.vo.OrderResponseVO;
 import com.stylefeng.guns.rest.modular.user.vo.UserInfo;
 import com.stylefeng.guns.rest.modular.user.vo.UserResponseVO;
 import io.jsonwebtoken.JwtException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,6 +47,10 @@ public class OrderTController {
                 */
     @Reference(interfaceClass = IOrderTService.class)
     IOrderTService iOrderTService;
+    @Reference(interfaceClass = CinemaServiceAPI.class, check = false)
+    CinemaServiceAPI cinemaService;
+    @Reference(interfaceClass = FilmService.class, check = true)
+    FilmService filmService;
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
     @PostMapping("/getOrderInfo")
@@ -59,7 +68,17 @@ public class OrderTController {
             UserInfo userInfo2 = JSON.toJavaObject(jsonObject , UserInfo.class);
             Integer uuid = userInfo2.getUuid();
             List<NewOrderTInfo> newOrderTInfos = iOrderTService.getOrderInfoPage(uuid);
-            if (newOrderTInfos==null){
+            for (NewOrderTInfo newOrderTInfo : newOrderTInfos) {
+                Integer filmNameId = Integer.valueOf(newOrderTInfo.getFilmName());
+                String filmName = filmService.getFilmById(filmNameId);
+                newOrderTInfo.setFilmName(filmName);
+                Integer cinemaNameId = Integer.valueOf(newOrderTInfo.getCinemaName());
+                CinemaInfo cinemaInfo = cinemaService.getCinemaInfoById(cinemaNameId);
+                String cinemaName = cinemaInfo.getCinemaName();
+                newOrderTInfo.setCinemaName(cinemaName);
+            }
+
+            if (newOrderTInfos.size()==0){
                 return UserResponseVO.fail(1,"订单列表为空哦！~");
             }
             Page<NewOrderTInfo> newOrderTInfoPage = new Page<>(nowPage, pageSize);

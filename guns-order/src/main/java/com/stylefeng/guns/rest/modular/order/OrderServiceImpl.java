@@ -13,6 +13,7 @@ import com.stylefeng.guns.rest.modular.order.model.*;
 import com.stylefeng.guns.rest.modular.order.util.UUIDUtil;
 import com.stylefeng.guns.rest.modular.order.vo.NewOrderVO;
 import org.apache.commons.collections.CollectionUtils;
+import com.stylefeng.guns.rest.modular.order.dao.MoocOrderTMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -39,7 +40,8 @@ public class OrderServiceImpl implements OrderService {
     MtimeFilmTMapper filmTMapper;
     @Autowired
     MtimeCinemaTMapper cinemaTMapper;
-
+    @Autowired
+    MoocOrderTMapper orderMapper;
     /**
      * 判断座位信息是否有效
      * @param fieldId
@@ -200,7 +202,7 @@ public class OrderServiceImpl implements OrderService {
      * @return
      */
     private String getSeatsName(String soldSeats) {
-        new Jedis()
+//        new Jedis()
         return null;
     }
 
@@ -209,8 +211,8 @@ public class OrderServiceImpl implements OrderService {
      * @param jsonSeat
      * @return
      */
-    private HallSeatsInfo getHallSeatInfo(String jsonSeat){
-        if (StringUtils.isEmpty(jsonSeat)){
+    private HallSeatsInfo getHallSeatInfo(String jsonSeat) {
+        if (StringUtils.isEmpty(jsonSeat)) {
             return null;
         }
         Jedis jedis = new Jedis();
@@ -218,11 +220,17 @@ public class OrderServiceImpl implements OrderService {
         //将json数据解析为JavaBean
         Gson gson = new Gson();
         HallSeatsInfo hallSeatsInfo = null;
-        try{
+        try {
             hallSeatsInfo = gson.fromJson(jsonSeats, HallSeatsInfo.class);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return hallSeatsInfo;
+    }
+
+    @Override
+    public String selectSoldSeats(int fieldId) {
+        return orderMapper.selectSoldSeatsByFieldId(fieldId);
+
     }
 }

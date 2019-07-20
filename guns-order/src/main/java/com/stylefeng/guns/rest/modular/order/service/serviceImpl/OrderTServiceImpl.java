@@ -1,7 +1,9 @@
 package com.stylefeng.guns.rest.modular.order.service.serviceImpl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.stylefeng.guns.rest.modular.cinema.CinemaServiceAPI;
+import com.stylefeng.guns.rest.modular.order.dao.MoocOrderTMapper;
+import com.stylefeng.guns.rest.modular.order.model.MoocOrderT;
+import com.stylefeng.guns.rest.modular.order.service.IMoocOrderTService;
 import com.stylefeng.guns.rest.modular.order.service.IOrderTService;
 import com.stylefeng.guns.rest.modular.order.persistence.model.OrderT;
 import com.stylefeng.guns.rest.modular.order.persistence.dao.OrderTMapper;
@@ -10,6 +12,7 @@ import com.stylefeng.guns.rest.modular.order.vo.NewOrderTInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,26 +25,26 @@ import java.util.List;
  */
 @Service
 @com.alibaba.dubbo.config.annotation.Service(interfaceClass = IOrderTService.class)
-public class OrderTServiceImpl  implements IOrderTService {
-    /*@Autowired
-    OrderTMapper orderTMapper;*/
+public class OrderTServiceImpl  extends ServiceImpl<MoocOrderTMapper, MoocOrderT> implements IOrderTService{
+    @Autowired
+    IMoocOrderTService orderTMapper;
     @Override
     public List<NewOrderTInfo> getOrderInfoPage(Integer uuid) {
-       // List<OrderT> orderTList = orderTMapper.selectList(new EntityWrapper<OrderT>().eq("order_user",uuid));
-
-       /* for (OrderT orderT : orderTList) {
+        List<MoocOrderT> orderTList = orderTMapper.selectList(new EntityWrapper<MoocOrderT>().eq("order_user",uuid));
+        ArrayList<NewOrderTInfo> newOrderTInfos = new ArrayList<>();
+        for (MoocOrderT orderT : orderTList) {
             NewOrderTInfo newOrderTInfo = new NewOrderTInfo();
-            orderT.getCinemaId();
-
-           *//* newOrderTInfo.setCinemaName();
-            newOrderTInfo.setFieldTime();
-            newOrderTInfo.setOrderId();
-            newOrderTInfo.setOrderPrice();
-            newOrderTInfo.getOrderStatus();
-            newOrderTInfo.setSeatsName();
-            newOrderTInfo.setFilmName();*//*
-
-        }*/
-        return null;
+            //需要查对应的影院
+            newOrderTInfo.setCinemaName(orderT.getCinemaId().toString());
+            newOrderTInfo.setFieldTime(orderT.getOrderTime());
+            newOrderTInfo.setOrderId(orderT.getUuid());
+            newOrderTInfo.setOrderPrice(orderT.getOrderPrice());
+            newOrderTInfo.setOrderStatus(orderT.getOrderStatus());
+            newOrderTInfo.setSeatsName(orderT.getSeatsName());
+            //需要查对应的名字
+            newOrderTInfo.setFilmName(orderT.getFilmId().toString());
+            newOrderTInfos.add(newOrderTInfo);
+        }
+        return newOrderTInfos;
     }
 }

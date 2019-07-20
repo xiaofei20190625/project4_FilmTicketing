@@ -32,4 +32,7 @@ public interface OrderService {
      * @return
      */
     NewOrderVO createNewOrder(String fieldId, String soldSeats, String seatsName, Integer userId);
+
+
+    String selectSoldSeats(int fieldId);
 }

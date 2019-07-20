@@ -1,5 +1,6 @@
 package com.stylefeng.guns.rest.modular.cinema.service.impl;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 
@@ -9,6 +10,7 @@ import com.stylefeng.guns.rest.common.persistence.dao.*;
 import com.stylefeng.guns.rest.common.persistence.model.*;
 import com.stylefeng.guns.rest.modular.cinema.CinemaServiceAPI;
 import com.stylefeng.guns.rest.modular.cinema.vo.*;
+import com.stylefeng.guns.rest.modular.order.OrderService;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -37,6 +39,8 @@ public class CinemaServiceImpl implements CinemaServiceAPI {
     MtimeAreaDictTMapper areaDictMapper;
     @Autowired
     MtimeHallDictTMapper hallDictMapper;
+    @Reference(interfaceClass = OrderService.class)
+    OrderService orderService;
 
 
    @Override
@@ -85,8 +89,8 @@ public class CinemaServiceImpl implements CinemaServiceAPI {
         if(cinemaQueryVo.getBrandId()!=99){
             entityWrapper.eq("brand_id",cinemaQueryVo.getBrandId());
         }
-        if(cinemaQueryVo.getDistrictId()!=99){
-            entityWrapper.eq("area_id",cinemaQueryVo.getDistrictId());
+        if(cinemaQueryVo.getAreaId()!=99){
+            entityWrapper.eq("area_id",cinemaQueryVo.getAreaId());
         }
         if(cinemaQueryVo.getBrandId()!=99){
             entityWrapper.like("hall_ids","%#"+cinemaQueryVo.getHallType()+"#%");
@@ -193,8 +197,9 @@ public class CinemaServiceImpl implements CinemaServiceAPI {
         hallInfoVo.setHallFieldId(field.getUuid() + "");
         hallInfoVo.setHallName(field.getHallName());
         hallInfoVo.setPrice(field.getPrice() + "");
+        String soldSeats = orderService.selectSoldSeats(fieldId);
         //Order提供已售座位
-        hallInfoVo.setSoldSeats("");
+        hallInfoVo.setSoldSeats(soldSeats);
         return hallInfoVo;
     }
 
