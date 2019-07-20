@@ -81,7 +81,5 @@ public interface FilmService {
     FilmDetailVO getFilmDetail(Integer searchType , String searchValue);
 
 
-
-
-
+    String getFilmById(Integer filmNameId);
 }

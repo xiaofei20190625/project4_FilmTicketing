@@ -137,4 +137,5 @@ public class JwtTokenUtil {
     public String getRandomKey() {
         return ToolUtil.getRandomString(6);
     }
+
 }

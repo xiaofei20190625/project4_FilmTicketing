@@ -14,9 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
+import redis.clients.jedis.Jedis;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
 /**
@@ -36,7 +36,7 @@ public class UserController {
     //user/register
     @PostMapping("/register")
     @ResponseBody
-    public UserResponseVO register(@RequestBody RegisterUser user){
+    public UserResponseVO register(RegisterUser user){
 
         int userName = userService.queryUserByUserName(user.getUsername());
         if (userName>=1){
@@ -58,7 +58,7 @@ public class UserController {
 
     @PostMapping("/check")
     @ResponseBody
-    public UserResponseVO check(@RequestBody String username){
+    public UserResponseVO check( String username){
 
         int userName = userService.queryUserByUserName(username);
 
@@ -88,13 +88,12 @@ public class UserController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    @Autowired
-    private JwtProperties jwtProperties;
+
 
     @GetMapping("/getUserInfo")
     @ResponseBody
     public Object getUserInfo(HttpServletRequest request){
-        String authToken = (String) authToken(request);
+        String authToken = (String)authToken(request);
         try{
             String usernameFromToken = jwtTokenUtil.getUsernameFromToken(authToken);
             UserInfo user = userService.queryUser(usernameFromToken);
@@ -104,6 +103,9 @@ public class UserController {
         }
 
     }
+
+    @Autowired
+    JwtProperties jwtProperties;
 
     private Object authToken(HttpServletRequest request) {
         final String requestHeader = request.getHeader(jwtProperties.getHeader());
@@ -129,10 +131,11 @@ public class UserController {
         return authToken;
     }
 
+
     //user/updateUserInfo
     @PostMapping("/updateUserInfo")
     @ResponseBody
-    public Object updateUserInfo(@RequestBody UserInfo userInfo){
+    public Object updateUserInfo(UserInfo userInfo){
         try {
             userInfo.setUpdateTime(new Date());
             int updateUserInfo = userService.updateUserInfo(userInfo);
@@ -152,14 +155,26 @@ public class UserController {
     @GetMapping("/logout")
     @ResponseBody
     public Object logout(HttpServletRequest request){
-        String authToken = (String) authToken(request);
-        String usernameFromToken = jwtTokenUtil.getUsernameFromToken(authToken);
-        if (usernameFromToken==null){
-            return UserResponseVO.ok(1,"退出失败，用户尚未登陆");
-        }
-        try{
-            //待加入退出逻辑
-            return UserResponseVO.ok(0,"退出成功");
+        try {
+            String authToken = (String) authToken(request);
+            String usernameFromToken = jwtTokenUtil.getUsernameFromToken(authToken);
+            /*通过usernameFromToken取userInfo*/
+            Jedis jedis = new Jedis();
+        /*String userInfo = jedis.get(usernameFromToken);
+        JSONObject jsonObject = JSONObject.parseObject(userInfo);
+        UserInfo userInfo2 = JSON.toJavaObject(jsonObject , UserInfo.class);
+        System.out.println(userInfo2.getUsername());*/
+
+            if (usernameFromToken==null){
+                return UserResponseVO.ok(1,"退出失败，用户尚未登陆");
+            }
+            try{
+                //待加入退出逻辑
+                jedis.del(usernameFromToken);
+                return UserResponseVO.ok(0,"退出成功");
+            }catch (Exception e){
+                return UserResponseVO.fail();
+            }
         }catch (Exception e){
             return UserResponseVO.fail();
         }
