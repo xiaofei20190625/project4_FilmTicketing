@@ -4,10 +4,13 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.google.gson.Gson;
+import com.stylefeng.guns.rest.modular.order.dao.MoocOrderTMapper;
 import com.stylefeng.guns.rest.modular.order.dao.MtimeFieldTMapper;
 import com.stylefeng.guns.rest.modular.order.dao.MtimeHallDictTMapper;
 import com.stylefeng.guns.rest.modular.order.model.HallSeatsInfo;
+import com.stylefeng.guns.rest.modular.order.model.MoocOrderT;
 import com.stylefeng.guns.rest.modular.order.model.MtimeFieldT;
 import com.stylefeng.guns.rest.modular.order.model.MtimeHallDictT;
 import org.apache.commons.collections.CollectionUtils;
@@ -28,6 +31,8 @@ public class OrderServiceImpl implements OrderService {
     MtimeFieldTMapper fieldTMapper;
     @Autowired
     MtimeHallDictTMapper hallDictTMapper;
+    @Autowired
+    MoocOrderTMapper orderTMapper;
 
     /**
      * 判断座位信息是否有效
@@ -61,9 +66,9 @@ public class OrderServiceImpl implements OrderService {
         Gson gson = new Gson();
         HallSeatsInfo hallSeatsInfo = null;
         try{
-//            hallSeatsInfo = gson.fromJson(jsonSeats, HallSeatsInfo.class);
-            JSONObject jsonObject = JSONObject.parseObject(jsonSeats);
-            hallSeatsInfo = JSON.toJavaObject(jsonObject, HallSeatsInfo.class);
+            hallSeatsInfo = gson.fromJson(jsonSeats, HallSeatsInfo.class);
+//            JSONObject jsonObject = JSONObject.parseObject(jsonSeats);
+//            hallSeatsInfo = JSON.toJavaObject(jsonObject, HallSeatsInfo.class);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -77,5 +82,21 @@ public class OrderServiceImpl implements OrderService {
             }
         }
         return false;
+    }
+
+    /**
+     * 判断座位是否已经卖出
+     * @param field
+     * @param seatId
+     * @return
+     */
+    @Override
+    public Boolean isSoldSeats(String field, String seatId) {
+        //判断座位是否已经售出，需要根据传入的场次信息，去订单表里查询该场次已经售出的所有订单
+        //先获取订单表里所有的fieldId匹配的订单list
+        EntityWrapper<MoocOrderT> entityWrapper = new EntityWrapper<>();
+        entityWrapper.eq("field_id", field);
+        List<MoocOrderT> moocOrderTList = orderTMapper.selectList(entityWrapper);
+        return null;
     }
 }

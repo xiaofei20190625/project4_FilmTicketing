@@ -1,12 +1,15 @@
 package com.stylefeng.guns.rest.modular.order.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by IceFloe_Rot
  * Date 2019/7/19 Time 20:48
  */
-public class HallSeatsInfo {
+public class HallSeatsInfo implements Serializable {
+    private static final long serialVersionUID = -7395087712436976822L;
+
     private Integer limit;
 
     private String ids;

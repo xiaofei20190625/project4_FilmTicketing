@@ -12,4 +12,12 @@ public interface OrderService {
      * @return
      */
     Boolean isTrueSeats(String fieldId, String seatId);
+
+    /**
+     * 判断座位是否已经卖出
+     * @param field
+     * @param seatId
+     * @return
+     */
+    Boolean isSoldSeats(String field, String seatId);
 }
