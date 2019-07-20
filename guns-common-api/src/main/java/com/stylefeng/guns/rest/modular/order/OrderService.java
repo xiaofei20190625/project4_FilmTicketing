@@ -1,5 +1,7 @@
 package com.stylefeng.guns.rest.modular.order;
 
+import com.stylefeng.guns.rest.modular.order.vo.NewOrderVO;
+
 /**
  * Created by IceFloe_Rot
  * Date 2019/7/18 Time 20:45
@@ -20,4 +22,14 @@ public interface OrderService {
      * @return
      */
     Boolean isSoldSeats(String field, String seatId);
+
+    /**
+     * 新建一个订单
+     * @param fieldId
+     * @param soldSeats
+     * @param seatsName
+     * @param userId
+     * @return
+     */
+    NewOrderVO createNewOrder(String fieldId, String soldSeats, String seatsName, Integer userId);
 }
