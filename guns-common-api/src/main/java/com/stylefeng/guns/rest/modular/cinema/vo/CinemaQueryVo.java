@@ -12,14 +12,14 @@ import java.io.Serializable;
 @Data
 public class  CinemaQueryVo implements Serializable {
     private Integer  brandId  = 99;
-    private Integer  districtId = 99;
+    private Integer  areaId = 99;
     private Integer  hallType = 99;
     private Integer  pageSize = 12;
     private Integer  nowPage = 1;
 
     public CinemaQueryVo(Integer brandId, Integer districtId, Integer hallType, Integer pageSize, Integer nowPage) {
         this.brandId = brandId;
-        this.districtId = districtId;
+        this.areaId = districtId;
         this.hallType = hallType;
         this.pageSize = pageSize;
         this.nowPage = nowPage;

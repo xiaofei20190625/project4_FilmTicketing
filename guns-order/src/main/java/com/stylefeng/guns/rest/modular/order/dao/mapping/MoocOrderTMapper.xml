@@ -22,4 +22,9 @@
         UUID, cinema_id, field_id, film_id, seats_ids, seats_name, film_price, order_price, order_time, order_user, order_status
     </sql>
 
+    <!--selectSoldSeatsByFieldId-->
+    <select id="selectSoldSeatsByFieldId" parameterType="_int" resultType="string">
+        select group_concat(seats_ids) from  mooc_order_t where field_id = #{fieldId}
+    </select>
+
 </mapper>

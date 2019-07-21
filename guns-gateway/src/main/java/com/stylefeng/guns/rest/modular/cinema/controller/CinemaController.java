@@ -34,18 +34,19 @@ public class CinemaController {
 
     ///cinema/getCinemas? brandId=30227&districtId=14&hallType=2
     //String brandId ,  String districtId ,String hallType,  String  pageSize ,String nowPage
-    @RequestMapping(value = "/getCinemas", method = RequestMethod.GET)
+    @RequestMapping("/getCinemas")
     public Object getCinemas(CinemaQueryVo cinemaQueryVo ) {
         try {
+
             Page<CinemaVo> cinemas = cinemaService.getCinemas(cinemaQueryVo);
-        List<CinemaVo> result = cinemas.getRecords();
-        if (result.size() == 0){
+        //List<CinemaVo> result = cinemas.getRecords();
+        if (cinemas.getSize() == 0){
             return CinemaResponseVo.businessFault();
         }else{
             Integer nowPage = cinemaQueryVo.getNowPage();
-            Integer pageSize = cinemaQueryVo.getPageSize();
-            int totalPage = result.size() / pageSize  + 1 ;
-            return CinemaResponseVo.ok(result , nowPage ,totalPage);
+            Integer totalPage = (int)cinemas.getPages();
+            //int totalPage = result.size() / pageSize  + 1 ;
+            return CinemaResponseVo.ok(cinemas.getRecords() , nowPage ,totalPage);
         }
     }catch (Exception e) {
             return CinemaResponseVo.systemException();
@@ -53,10 +54,10 @@ public class CinemaController {
     }
 
     ///cinema/getCondition
-    @RequestMapping(value = "getCondition" ,method = RequestMethod.GET)
+    @RequestMapping("getCondition" )
     public Object getCondition(CinemaQueryVo cinemaQueryVo){
         List<BrandVo> brandList = cinemaService.getBrands(cinemaQueryVo.getBrandId());
-        List<AreaVo> areaList = cinemaService.getAreas(cinemaQueryVo.getDistrictId());
+        List<AreaVo> areaList = cinemaService.getAreas(cinemaQueryVo.getAreaId());
         List<HallTypeVo> halltypeList = cinemaService.getHallTypes(cinemaQueryVo.getBrandId());
         CinemaConditionResponseVo responseVo = new CinemaConditionResponseVo();
         responseVo.setBrandList(brandList);
