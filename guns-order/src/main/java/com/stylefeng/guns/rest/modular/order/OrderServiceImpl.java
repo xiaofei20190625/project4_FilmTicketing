@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.stylefeng.guns.rest.modular.film.FilmService;
 import com.stylefeng.guns.rest.modular.order.dao.*;
 import com.stylefeng.guns.rest.modular.order.model.*;
+import com.stylefeng.guns.rest.modular.order.util.JedisUtil;
 import com.stylefeng.guns.rest.modular.order.util.NumberUtils;
 import com.stylefeng.guns.rest.modular.order.util.UUIDUtil;
 import com.stylefeng.guns.rest.modular.order.vo.NewOrderVO;
@@ -207,7 +208,7 @@ public class OrderServiceImpl implements OrderService {
      * @return
      */
     private String getSeatsName(String soldSeats) {
-        Jedis jedis = new Jedis();
+        Jedis jedis = JedisUtil.getJedis();
         //调用getHallSeatInfo方法，得到座位信息
         HallSeatsInfo hallSeatInfo = getHallSeatInfo("4dx.json");
         //将soldSeats转换为ids数组
@@ -237,6 +238,7 @@ public class OrderServiceImpl implements OrderService {
                 sb.append(",");
             }
         }
+        jedis.close();
         return sb.toString();
     }
 
@@ -249,7 +251,7 @@ public class OrderServiceImpl implements OrderService {
         if (StringUtils.isEmpty(jsonSeat)) {
             return null;
         }
-        Jedis jedis = new Jedis();
+        Jedis jedis = JedisUtil.getJedis();
         String jsonSeats = jedis.get(jsonSeat);
         //将json数据解析为JavaBean
         Gson gson = new Gson();
@@ -259,6 +261,7 @@ public class OrderServiceImpl implements OrderService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        jedis.close();
         return hallSeatsInfo;
     }
 
