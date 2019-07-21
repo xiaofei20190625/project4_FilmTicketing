@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.stylefeng.guns.rest.modular.film.FilmService;
 import com.stylefeng.guns.rest.modular.order.dao.*;
 import com.stylefeng.guns.rest.modular.order.model.*;
+import com.stylefeng.guns.rest.modular.order.util.NumberUtils;
 import com.stylefeng.guns.rest.modular.order.util.UUIDUtil;
 import com.stylefeng.guns.rest.modular.order.vo.NewOrderVO;
 import org.apache.commons.collections.CollectionUtils;
@@ -42,6 +43,9 @@ public class OrderServiceImpl implements OrderService {
     MtimeCinemaTMapper cinemaTMapper;
     @Autowired
     MoocOrderTMapper orderMapper;
+
+    private static HashMap<String, String> seatsMap = new HashMap<>();
+
     /**
      * 判断座位信息是否有效
      * @param fieldId
@@ -134,7 +138,8 @@ public class OrderServiceImpl implements OrderService {
         newOrderVO.setCinemaName(cinemaName);
 
         //设置订单seatsName
-        newOrderVO.setSeatsName(seatsName);
+        String seatsDetailName = getSeatsName(soldSeats);
+        newOrderVO.setSeatsName(seatsDetailName);
 
         //设置订单orderPrice
         String[] ids = soldSeats.split(",");
@@ -147,7 +152,7 @@ public class OrderServiceImpl implements OrderService {
         String timeStamp = Long.toString(new Date().getTime());
         newOrderVO.setOrderTimestamp(timeStamp);
 
-        String seatsDetailName = getSeatsName(soldSeats);
+
         newOrderT.setUuid(uuid);
         newOrderT.setCinemaId(cinemaId);
         newOrderT.setFieldId(Integer.parseInt(fieldId));
@@ -202,8 +207,37 @@ public class OrderServiceImpl implements OrderService {
      * @return
      */
     private String getSeatsName(String soldSeats) {
-//        new Jedis()
-        return null;
+        Jedis jedis = new Jedis();
+        //调用getHallSeatInfo方法，得到座位信息
+        HallSeatsInfo hallSeatInfo = getHallSeatInfo("4dx.json");
+        //将soldSeats转换为ids数组
+        String[] ids = soldSeats.split(",");
+        //遍历HallSeatsInfo的Single和Couple，并将每一个座位录入到map里面（以座位号为key，排和列为value）
+        List<List<Single>> single = hallSeatInfo.getSingle();
+        List<List<Couple>> couple = hallSeatInfo.getCouple();
+
+        if (seatsMap.isEmpty()){
+            NumberUtils numberUtils = NumberUtils.getInstance();
+            for (List<Single> row : single){
+                for (Single s : row){
+                    seatsMap.put(s.getSeatId().toString(), "第" + numberUtils.formatInteger(s.getRow()) + "排" + "第" + s.getColumn() + "座");
+                }
+            }
+            for (List<Couple> row : couple){
+                for (Couple s : row){
+                    seatsMap.put(s.getSeatId().toString(), "第" + numberUtils.formatInteger(s.getRow()) + "排" + "第" + s.getColumn() + "座");
+                }
+            }
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < ids.length; i++) {
+            sb.append(seatsMap.get(ids[i]));
+            if (i != ids.length - 1){
+                sb.append(",");
+            }
+        }
+        return sb.toString();
     }
 
     /**
