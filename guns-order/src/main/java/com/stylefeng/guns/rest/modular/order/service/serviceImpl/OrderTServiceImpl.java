@@ -27,7 +27,7 @@ import java.util.List;
 @com.alibaba.dubbo.config.annotation.Service(interfaceClass = IOrderTService.class)
 public class OrderTServiceImpl  extends ServiceImpl<MoocOrderTMapper, MoocOrderT> implements IOrderTService{
     @Autowired
-    IMoocOrderTService orderTMapper;
+    MoocOrderTMapper orderTMapper;
     @Override
     public List<NewOrderTInfo> getOrderInfoPage(Integer uuid) {
         List<MoocOrderT> orderTList = orderTMapper.selectList(new EntityWrapper<MoocOrderT>().eq("order_user",uuid));
