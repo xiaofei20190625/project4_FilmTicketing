@@ -11,6 +11,7 @@ import com.stylefeng.guns.rest.modular.film.FilmService;
 import com.stylefeng.guns.rest.modular.order.dao.*;
 import com.stylefeng.guns.rest.modular.order.model.*;
 import com.stylefeng.guns.rest.modular.order.util.JedisUtil;
+import com.stylefeng.guns.rest.modular.order.util.Json2RedisUtil;
 import com.stylefeng.guns.rest.modular.order.util.NumberUtils;
 import com.stylefeng.guns.rest.modular.order.util.UUIDUtil;
 import com.stylefeng.guns.rest.modular.order.vo.NewOrderVO;
@@ -21,6 +22,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import redis.clients.jedis.Jedis;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -195,9 +198,10 @@ public class OrderServiceImpl implements OrderService {
         //--对目标字符串进行判断，按照其有没有逗号判断是否为座位号数组
         //如果是多个座位号，则将其拆分为id数组（如果不是，则不会拆分）
         String[] targetIds = targetId.split(",");
-        //对target数组中的每一个id进行判断
-        if (idSet.containsAll(Arrays.asList(targetIds))){
-            return true;
+        //对targetIds数组中的每一个id进行判断
+        for (int i = 0; i < targetIds.length; i++) {
+            if (idSet.contains(targetIds[i]))
+                return true;
         }
         return false;
     }
@@ -244,15 +248,25 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 根据json文件的文件名从redis中获取json数据，并封装为JavaBean作为返回值
-     * @param jsonSeat
+     * @param jsonSeatName
      * @return
      */
-    private HallSeatsInfo getHallSeatInfo(String jsonSeat) {
-        if (StringUtils.isEmpty(jsonSeat)) {
-            return null;
+    private HallSeatsInfo getHallSeatInfo(String jsonSeatName) {
+        if (StringUtils.isEmpty(jsonSeatName)) {
+            return new HallSeatsInfo();
         }
         Jedis jedis = JedisUtil.getJedis();
-        String jsonSeats = jedis.get(jsonSeat);
+        String jsonSeats = jedis.get(jsonSeatName);
+        if (jsonSeats == null){
+            String absolutePath = new File("").getAbsolutePath();
+            File jsonFile = new File(absolutePath + "/guns-order/src/main/resources/static/json/" + jsonSeatName);
+            try {
+                Json2RedisUtil.inputJson2Redis(jsonFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            jsonSeats = jedis.get(jsonSeatName);
+        }
         //将json数据解析为JavaBean
         Gson gson = new Gson();
         HallSeatsInfo hallSeatsInfo = null;
