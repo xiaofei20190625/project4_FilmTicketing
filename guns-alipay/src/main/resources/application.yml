@@ -44,6 +44,7 @@ myoss:
   endpoint: oss-cn-beijing.aliyuncs.com
   access-key: 修改自己的就可以
   secret: 修改自己的就可以
+
 logging:
   level.root: info
   level.com.stylefeng: debug
