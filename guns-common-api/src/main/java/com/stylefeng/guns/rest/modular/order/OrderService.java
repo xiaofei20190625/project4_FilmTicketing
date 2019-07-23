@@ -35,4 +35,6 @@ public interface OrderService {
 
 
     String selectSoldSeats(int fieldId);
+
+    NewOrderVO createNewOrder123(String fieldId, String soldSeats, String seatsName, Integer uuid);
 }

@@ -39,7 +39,19 @@ public class OrderTServiceImpl  extends ServiceImpl<MoocOrderTMapper, MoocOrderT
             newOrderTInfo.setFieldTime(orderT.getOrderTime());
             newOrderTInfo.setOrderId(orderT.getUuid());
             newOrderTInfo.setOrderPrice(orderT.getOrderPrice());
-            newOrderTInfo.setOrderStatus(orderT.getOrderStatus());
+            /**
+             * 0-待支付,1-已支付,2-已关闭
+             */
+            Integer status = orderT.getOrderStatus();
+            if (status==0){
+                newOrderTInfo.setOrderStatus("待支付");
+            }
+            if (status==1){
+                newOrderTInfo.setOrderStatus("已支付");
+            }
+            if (status==2){
+                newOrderTInfo.setOrderStatus("已关闭");
+            }
             newOrderTInfo.setSeatsName(orderT.getSeatsName());
             //需要查对应的名字
             newOrderTInfo.setFilmName(orderT.getFilmId().toString());

@@ -35,8 +35,8 @@ public class MyTest {
 
     @Test
     public void  test2(){
-        List<MtimeCinemaT> cinemaTList = cinemaTMapper.selectList(new EntityWrapper<>());
-        for (MtimeCinemaT c:cinemaTList
+        List<NewMtimeCinemaT> cinemaTList = cinemaTMapper.selectList(new EntityWrapper<>());
+        for (NewMtimeCinemaT c:cinemaTList
              ) {
             System.out.println("c = " + c);
         }

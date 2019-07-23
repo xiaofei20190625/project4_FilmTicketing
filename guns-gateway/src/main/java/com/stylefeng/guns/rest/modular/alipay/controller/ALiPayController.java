@@ -31,7 +31,7 @@ public class ALiPayController {
     AliPayService aliPayService;
     @PostMapping("/getPayInfo")
     @ResponseBody
-    public Object getPayInfo(Integer orderId) {
+    public Object getPayInfo(String orderId) {
         try{
             String QRCodeAddress = aliPayService.getPayInfo(orderId);
             if (QRCodeAddress!=null){
@@ -60,7 +60,7 @@ tryNums	重试次数	否，默认为1,4次超时
 */
     @PostMapping("/getPayResult")
     @ResponseBody
-    public Object getPayResult(Integer orderId,@RequestParam(defaultValue = "1")Integer tryNums) {
+    public Object getPayResult(String orderId,@RequestParam(defaultValue = "1")Integer tryNums) {
         try{
             if (tryNums>3){
                 return UserResponseVO.fail(1,"订单支付失败，请稍后重试");

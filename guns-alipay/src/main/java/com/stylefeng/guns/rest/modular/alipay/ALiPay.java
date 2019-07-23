@@ -3,22 +3,15 @@ import com.alipay.api.AlipayResponse;
 import com.alipay.api.domain.TradeFundBill;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
 import com.alipay.api.response.AlipayTradeQueryResponse;
-import com.alipay.api.response.MonitorHeartbeatSynResponse;
 import com.alibaba.dubbo.common.utils.StringUtils;
-import com.alipay.api.AlipayResponse;
-import com.alipay.api.domain.TradeFundBill;
-import com.alipay.api.response.AlipayTradePrecreateResponse;
-import com.alipay.api.response.AlipayTradeQueryResponse;
-import com.alipay.api.response.MonitorHeartbeatSynResponse;
+import com.stylefeng.guns.rest.common.persistence.model.MoocOrderT;
 import com.stylefeng.guns.rest.modular.alipay.config.Configs;
 import com.stylefeng.guns.rest.modular.alipay.model.ExtendParams;
 import com.stylefeng.guns.rest.modular.alipay.model.GoodsDetail;
 import com.stylefeng.guns.rest.modular.alipay.model.builder.*;
-import com.stylefeng.guns.rest.modular.alipay.model.hb.*;
 import com.stylefeng.guns.rest.modular.alipay.model.result.AlipayF2FPayResult;
 import com.stylefeng.guns.rest.modular.alipay.model.result.AlipayF2FPrecreateResult;
 import com.stylefeng.guns.rest.modular.alipay.model.result.AlipayF2FQueryResult;
-import com.stylefeng.guns.rest.modular.alipay.model.result.AlipayF2FRefundResult;
 import com.stylefeng.guns.rest.modular.alipay.service.AlipayMonitorService;
 import com.stylefeng.guns.rest.modular.alipay.service.AlipayTradeService;
 import com.stylefeng.guns.rest.modular.alipay.service.impl.AlipayMonitorServiceImpl;
@@ -27,11 +20,11 @@ import com.stylefeng.guns.rest.modular.alipay.service.impl.AlipayTradeWithHBServ
 import com.stylefeng.guns.rest.modular.alipay.utils.MyOssClient;
 import com.stylefeng.guns.rest.modular.alipay.utils.Utils;
 import com.stylefeng.guns.rest.modular.alipay.utils.ZxingUtils;
-import com.stylefeng.guns.rest.modular.order.model.MoocOrderT;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,6 +35,7 @@ import java.util.*;
  * 简单main函数，用于测试当面付api
  * sdk和demo的意见和问题反馈请联系：liuyang.kly@alipay.com
  */
+@Component
 public class ALiPay {
     private static Log log = LogFactory.getLog(ALiPay.class);
 
@@ -111,9 +105,9 @@ public class ALiPay {
 
 
     // 测试当面付2.0查询订单
-    public Boolean test_trade_query(Integer id) {
+    public Boolean test_trade_query(String id) {
         // (必填) 商户订单号，通过此商户订单号查询当面付的交易状态
-        String outTradeNo = String.valueOf(id);
+        String outTradeNo = id;
 
         // 创建查询请求builder，设置请求参数
         AlipayTradeQueryRequestBuilder builder = new AlipayTradeQueryRequestBuilder()
@@ -279,7 +273,7 @@ public class ALiPay {
         extendParams.setSysServiceProviderId("2088100200300400500");
 
         // 支付超时，定义为120分钟
-        String timeoutExpress = "30s";
+        String timeoutExpress = "120m";
 
         // 商品明细列表，需填写购买商品详细信息，
         List<GoodsDetail> goodsDetailList = new ArrayList<GoodsDetail>();
@@ -312,16 +306,24 @@ public class ALiPay {
 
                 //  需要修改为运行机器上的路径
                 String path="D:/tmp";
+                // 创建本地上传图片的文件夹，不存在则创建
+                File folder = new File(path);
+                if (!folder.exists()) {
+                    folder.setWritable(true);
+                    folder.mkdirs();
+                }
                 String qrPath = String.format(path+"/qr-%s.png",response.getOutTradeNo());
 
                 qrFileName = String.format("qr-%s.png",response.getOutTradeNo());
 
 
                 log.info("filePath:" + qrPath);
-                File qrCodeImge = ZxingUtils.getQRCodeImge(response.getQrCode(), 256, qrPath);
+                ZxingUtils.getQRCodeImge(response.getQrCode(), 256, qrPath);
+                File targetFile = new File(path, qrFileName);
                 try {
-                    //上传到ftp服务器
-                    myOssClient.ossFileUpload(qrCodeImge, qrFileName);
+                    //上传到oss服务器
+                    myOssClient.ossFileUpload(targetFile, qrFileName);
+                    return qrFileName;
                 } catch (IOException e){
                     log.error("上传二维码异常",e);
                 }

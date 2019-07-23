@@ -2,14 +2,14 @@ package com.stylefeng.guns.rest.modular.alipay.vo;
 
 
 public class QRcode {
-    Integer orderId;
+    String orderId;
     String  QRCodeAddress;
 
-    public Integer getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 

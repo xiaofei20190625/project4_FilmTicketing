@@ -1,7 +1,7 @@
 package com.stylefeng.guns.rest.modular.alipay.service;
 
 public interface AliPayService {
-    String getPayInfo(Integer orderId);
+    String getPayInfo(String orderId);
 
-    Boolean getPayResult(Integer id, Integer orderId);
+    Boolean getPayResult(String orderId,Integer id);
 }

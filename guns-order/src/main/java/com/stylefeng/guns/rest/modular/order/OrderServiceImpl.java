@@ -132,7 +132,7 @@ public class OrderServiceImpl implements OrderService {
 
         //设置订单cinemaName
         Integer cinemaId = field.getCinemaId();
-//        MtimeCinemaT cinemaT = cinemaTMapper.selectByUUId(cinemaId);
+//        NewMtimeCinemaT cinemaT = cinemaTMapper.selectByUUId(cinemaId);
         List<MtimeCinemaT> cinemaTS = cinemaTMapper.selectList(new EntityWrapper<MtimeCinemaT>().eq("UUID", cinemaId));
         String cinemaName = cinemaTS.get(0).getCinemaName();
         newOrderVO.setCinemaName(cinemaName);
@@ -266,5 +266,71 @@ public class OrderServiceImpl implements OrderService {
     public String selectSoldSeats(int fieldId) {
         return orderMapper.selectSoldSeatsByFieldId(fieldId);
 
+    }
+
+    @Override
+    public NewOrderVO createNewOrder123(String fieldId, String soldSeats, String seatsName, Integer uuid) {
+        NewOrderVO newOrderVO = new NewOrderVO();
+        MoocOrderT newOrderT = new MoocOrderT();
+
+        //设置订单id
+        String uuid1 = UUIDUtil.getRandomUUID();
+        newOrderVO.setOrderId(uuid1);
+
+        //设置订单filmName
+        //--通过field_id查询film_id和cinema_id
+        MtimeFieldT field = fieldTMapper.selectList(new EntityWrapper<MtimeFieldT>().eq("UUID", fieldId)).get(0);
+        Integer filmId = field.getFilmId();
+        List<MtimeFilmT> filmTS = filmTMapper.selectList(new EntityWrapper<MtimeFilmT>().eq("UUID", filmId));
+        String filmName = filmTS.get(0).getFilmName();
+        newOrderVO.setFilmName(filmName);
+
+        //设置订单fieldTime
+        String beginTime = field.getBeginTime();
+        SimpleDateFormat format1 = new SimpleDateFormat("今天 MM月dd号 ");
+        String fieldTime = format1.format(new Date()) + beginTime;
+        newOrderVO.setFieldTime(fieldTime);
+
+        //设置订单cinemaName
+        Integer cinemaId = field.getCinemaId();
+//        NewMtimeCinemaT cinemaT = cinemaTMapper.selectByUUId(cinemaId);
+        List<MtimeCinemaT> cinemaTS = cinemaTMapper.selectList(new EntityWrapper<MtimeCinemaT>().eq("UUID", cinemaId));
+        String cinemaName = cinemaTS.get(0).getCinemaName();
+        newOrderVO.setCinemaName(cinemaName);
+
+        //设置订单seatsName
+        String seatsDetailName = getSeatsName(soldSeats);
+        newOrderVO.setSeatsName(seatsDetailName);
+
+        //设置订单orderPrice
+        String[] ids = soldSeats.split(",");
+        int num = ids.length;
+        double price = field.getPrice();
+        double orderPrice = 1.0 * num * price;
+        newOrderVO.setOrderPrice(orderPrice);
+
+        //设置订单orderTimestamp
+        String timeStamp = Long.toString(new Date().getTime());
+        newOrderVO.setOrderTimestamp(timeStamp);
+
+
+        newOrderT.setUuid(uuid1);
+        newOrderT.setCinemaId(cinemaId);
+        newOrderT.setFieldId(Integer.parseInt(fieldId));
+        newOrderT.setFilmId(filmId);
+        newOrderT.setSeatsIds(soldSeats);
+        newOrderT.setSeatsName(seatsDetailName);
+        newOrderT.setFilmPrice(price);
+        newOrderT.setOrderPrice(orderPrice);
+        newOrderT.setOrderTime(new Date());
+        newOrderT.setOrderUser(uuid);
+        newOrderT.setOrderStatus(0);
+
+        Integer insert = orderTMapper.insert(newOrderT);
+        if (insert != 1){
+            return null;
+        }
+
+        return newOrderVO;
     }
 }

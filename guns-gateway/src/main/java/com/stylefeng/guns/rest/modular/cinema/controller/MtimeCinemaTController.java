@@ -1,14 +1,15 @@
 package com.stylefeng.guns.rest.modular.cinema.controller;
 
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.stylefeng.guns.rest.common.persistence.model.MtimeCinemaT;
-import com.stylefeng.guns.rest.modular.cinema.service.IMtimeCinemaTService;
-import com.stylefeng.guns.rest.modular.cinema.vo.CinemaQueryVo;
+
+import com.stylefeng.guns.rest.modular.cinema.IMtimeCinemaTService;
 import com.stylefeng.guns.rest.modular.cinema.util.CinemaResponseVo;
+import com.stylefeng.guns.rest.modular.cinema.vo.CinemaQueryVo;
+import com.stylefeng.guns.rest.modular.cinema.vo.NewMtimeCinemaT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,7 +28,7 @@ import java.util.List;
 @RequestMapping("/mtimeCinemaT")
 public class MtimeCinemaTController {
 
-    @Autowired
+    @Reference(interfaceClass = IMtimeCinemaTService.class)
     IMtimeCinemaTService cinemaService;
         //1、根据CinemaQueryVO，查询影院列表
         //2、根据条件获取品牌列表
@@ -42,13 +43,13 @@ public class MtimeCinemaTController {
     ///cinema/getCinemas? brandId=30227&districtId=14&hallType=2&pageSize=12&nowPage=1
     @RequestMapping(value = "getCinemass" , method = RequestMethod.GET)
     public  Object getCinemas( String brandId ,  String districtId ,String hallType,  String  pageSize ,String nowPage){
-        List<MtimeCinemaT> cinemaList;
+        List<NewMtimeCinemaT> cinemaList;
         List<CinemaQueryVo> data = new ArrayList<>();
         if (brandId ==null){
-            cinemaList = cinemaService.selectList(new EntityWrapper<>());
+            cinemaList = cinemaService.selectList();
         }else
             cinemaList =  cinemaService.queryByBrandId(Integer.parseInt(brandId));
-        for (MtimeCinemaT cinema: cinemaList) {
+        for (NewMtimeCinemaT cinema: cinemaList) {
            //CinemaQueryVo cinemaQueryVo = new CinemaQueryVo();
            //cinemaQueryVo.setUuid(cinema.getUuid());
            //cinemaQueryVo.setCinemaName(cinema.getCinemaName());

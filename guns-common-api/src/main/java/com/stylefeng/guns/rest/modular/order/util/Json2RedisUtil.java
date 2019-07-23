@@ -58,7 +58,7 @@ public class Json2RedisUtil {
     }
 
     /*public static void main(String[] args) throws IOException {
-        File file = new File("F:\\JavaProjects\\Project4_film\\film-front\\static\\json");
+        File file = new File("D:\\14期课件\\project4\\前端代码\\film-front3.0\\film-front\\static\\json");
         inputJsonFiles2Redis(file);
     }*/
 }

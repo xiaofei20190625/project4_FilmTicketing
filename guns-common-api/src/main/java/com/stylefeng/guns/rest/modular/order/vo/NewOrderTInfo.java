@@ -35,7 +35,7 @@ public class NewOrderTInfo implements Serializable {
     /**
      * 0-待支付,1-已支付,2-已关闭
      */
-    private Integer orderStatus;
+    private String orderStatus;
 
     public String getOrderId() {
         return orderId;
@@ -85,11 +85,11 @@ public class NewOrderTInfo implements Serializable {
         this.orderPrice = orderPrice;
     }
 
-    public Integer getOrderStatus() {
+    public String getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(Integer orderStatus) {
+    public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
     }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.stylefeng.guns.rest.modular.order.dao.MoocOrderTMapper">
+<mapper namespace="com.stylefeng.guns.rest.common.persistence.dao.MoocOrderTMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.stylefeng.guns.rest.modular.order.model.MoocOrderT">
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.rest.common.persistence.model.MoocOrderT">
         <result column="UUID" property="uuid" />
         <result column="cinema_id" property="cinemaId" />
         <result column="field_id" property="fieldId" />
@@ -22,4 +22,16 @@
         UUID, cinema_id, field_id, film_id, seats_ids, seats_name, film_price, order_price, order_time, order_user, order_status
     </sql>
 
+    <select id="selectOneOrder" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from mooc_order_t
+        where UUID = #{uuid}
+    </select>
+
+    <update id="updateNew" parameterType="com.stylefeng.guns.rest.common.persistence.model.MoocOrderT">
+    update mooc_order_t
+    set order_status = #{orderStatus}
+    where UUID = #{uuid}
+  </update>
 </mapper>

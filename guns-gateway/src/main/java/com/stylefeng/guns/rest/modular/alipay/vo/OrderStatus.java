@@ -2,15 +2,15 @@ package com.stylefeng.guns.rest.modular.alipay.vo;
 
 public class OrderStatus {
 
-    Integer orderId;
+    String orderId;
     Integer orderStatus;
     String  orderMsg;
 
-    public Integer getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 

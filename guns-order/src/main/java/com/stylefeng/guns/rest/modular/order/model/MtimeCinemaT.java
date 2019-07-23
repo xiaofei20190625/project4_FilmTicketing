@@ -147,7 +147,7 @@ public class MtimeCinemaT extends Model<MtimeCinemaT> {
 
     @Override
     public String toString() {
-        return "MtimeCinemaT{" +
+        return "NewMtimeCinemaT{" +
         "uuid=" + uuid +
         ", cinemaName=" + cinemaName +
         ", cinemaPhone=" + cinemaPhone +

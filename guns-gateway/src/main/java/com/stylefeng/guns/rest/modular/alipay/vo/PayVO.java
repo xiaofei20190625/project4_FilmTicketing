@@ -33,7 +33,7 @@ public class PayVO {
     public static PayVO ok(Object data){
         PayVO payVO = new PayVO();
         payVO.setData(data);
-        String url = "https://sszskkk.oss-cn-beijing.aliyuncs.com/";
+        String url = "https://hao6666.oss-cn-beijing.aliyuncs.com/";
         payVO.setImgPre(url);
         payVO.setStatus(0);
         return payVO;

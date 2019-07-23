@@ -84,7 +84,7 @@ public class OrderTController {
             Page<NewOrderTInfo> newOrderTInfoPage = new Page<>(nowPage, pageSize);
             newOrderTInfoPage.setRecords(newOrderTInfos);
             //PageInfoBT<NewOrderTInfo> newOrderTInfoPageInfoBT = new PageInfoBT<>(newOrderTInfoPage);
-            return OrderResponseVO.ok(newOrderTInfoPage);
+            return OrderResponseVO.ok(newOrderTInfoPage.getRecords(),nowPage,pageSize);
         }catch (Exception e){
             return UserResponseVO.fail();
         }
