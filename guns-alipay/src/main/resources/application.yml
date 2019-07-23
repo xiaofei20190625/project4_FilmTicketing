@@ -42,8 +42,8 @@ spring:
 myoss:
   bucket: hao6666
   endpoint: oss-cn-beijing.aliyuncs.com
-  access-key: LTAI6oEddMf9eVfL
-  secret: HHbUz1F4mo183rIdzxXk9GSkWeTHgl
+  access-key: LTAI6oEddMf9
+  secret: HHbUz1F4mo183rIdzxXk9G
 logging:
   level.root: info
   level.com.stylefeng: debug
