@@ -7,6 +7,7 @@ import com.stylefeng.guns.rest.modular.film.vo.ConditionVo;
 import com.stylefeng.guns.rest.modular.film.vo.FilmDetailVO;
 import com.stylefeng.guns.rest.modular.film.vo.GetFilmVO;
 import com.stylefeng.guns.rest.modular.film.vo.ResponseVO1;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/film")
+@RequestMapping("film")
 @Slf4j
 public class FilmController {
     @Reference(interfaceClass = FilmService.class, check = true)
@@ -85,5 +86,4 @@ public class FilmController {
         ResponseVO1<FilmDetailVO> responseVO1 = new ResponseVO1<>(0, "http://img.meetingshop.cn/", "", "", "", filmDetail);
         return responseVO1;
     }
-
 }

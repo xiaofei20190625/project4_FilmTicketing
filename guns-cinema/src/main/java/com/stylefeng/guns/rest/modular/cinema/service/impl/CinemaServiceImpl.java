@@ -39,6 +39,7 @@ public class CinemaServiceImpl implements CinemaServiceAPI {
     MtimeAreaDictTMapper areaDictMapper;
     @Autowired
     MtimeHallDictTMapper hallDictMapper;
+
     @Reference(interfaceClass = OrderService.class)
     OrderService orderService;
 
@@ -55,7 +56,7 @@ public class CinemaServiceImpl implements CinemaServiceAPI {
            CinemaVo cinemaQueryVo = new CinemaVo();
            cinemaQueryVo.setUuid(cinema.getUuid() + "");
            cinemaQueryVo.setCinemaName(cinema.getCinemaName());
-           cinemaQueryVo.setAddress(cinema.getCinemaAddress());
+           cinemaQueryVo.setCinemaAddress(cinema.getCinemaAddress());
            cinemaQueryVo.setMinimumPrice(cinema.getMinimumPrice() + "");
            data.add(cinemaQueryVo);
        }
@@ -68,9 +69,10 @@ public class CinemaServiceImpl implements CinemaServiceAPI {
         CinemaInfo cinemaInfo = new CinemaInfo();
         cinemaInfo.setCinemaId(cinema.getUuid());
         cinemaInfo.setCinemaName(cinema.getCinemaName());
-        cinemaInfo.setCinemaAdress(cinema.getCinemaAddress());
+        cinemaInfo.setCinemaAddress(cinema.getCinemaAddress());
         cinemaInfo.setCinemaPhone(cinema.getCinemaPhone());
-        cinemaInfo.setImgUrl("cinemas/123.jpg");
+        cinemaInfo.setImgUrl(cinema.getImgAddress());
+        //cinemaInfo.setImgUrl("cinemas/123.jpg");
         return  cinemaInfo;
     }
 
@@ -104,7 +106,7 @@ public class CinemaServiceImpl implements CinemaServiceAPI {
         for(MtimeCinemaT cinema:cinemaList){
             CinemaVo cinemaVo = new CinemaVo();
             cinemaVo.setUuid(cinema.getUuid() + "");
-            cinemaVo.setAddress(cinema.getCinemaAddress());
+            cinemaVo.setCinemaAddress(cinema.getCinemaAddress());
             cinemaVo.setCinemaName(cinema.getCinemaName());
             cinemaVo.setMinimumPrice(cinema.getMinimumPrice() + "");
             cinemaVoList.add(cinemaVo);
@@ -179,7 +181,7 @@ public class CinemaServiceImpl implements CinemaServiceAPI {
         CinemaInfo cinemaInfo = new CinemaInfo();
         cinemaInfo.setCinemaId(cinema.getUuid());
         cinemaInfo.setCinemaPhone(cinema.getCinemaPhone());
-        cinemaInfo.setCinemaAdress(cinema.getCinemaAddress());
+        cinemaInfo.setCinemaAddress(cinema.getCinemaAddress());
         cinemaInfo.setCinemaName(cinema.getCinemaName());
 
         return cinemaInfo;

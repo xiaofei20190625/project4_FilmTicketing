@@ -11,12 +11,13 @@ import java.io.Serializable;
  */
 @Data
 public class CinemaResponseVo implements Serializable {
-private  Integer status = 0 ;
-private  Integer nowPage;
-private  Integer totalPage;
-private  Object data;
-private  String msg = "";
-private  String imgPre = "http://img.meetingshop.cn/";
+    private static final long serialVersionUID = 719173633814238065L;
+    private  Integer status = 0 ;
+    private  Integer nowPage;
+    private  Integer totalPage;
+    private  Object data;
+    private  String msg = "";
+    private  String imgPre = "http://img.meetingshop.cn/";
 
     public static CinemaResponseVo ok(Object data , int nowPage , int totalPage){
         CinemaResponseVo cinemaVo = new CinemaResponseVo();

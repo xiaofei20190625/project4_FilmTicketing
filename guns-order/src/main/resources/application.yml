@@ -46,3 +46,9 @@ logging:
   level.com.stylefeng: debug
   path: logs/
   file: guns-rest.log
+
+jedis:
+  max-total: 100
+  max-wait-millis: 3000
+  host: 127.0.0.1
+  port: 6379

@@ -12,6 +12,7 @@ import java.util.List;
  */
 @Data
 public class FilmList  implements  Serializable{
+    private static final long serialVersionUID = -7727685632585360718L;
     private Integer filmId;
     private String filmName ;
     private String filmLength ;

@@ -11,6 +11,7 @@ import java.io.Serializable;
  */
 @Data
 public class HallInfoVo implements Serializable {
+    private static final long serialVersionUID = -934512413677620116L;
     private String hallFieldId;
     private String hallName;
     private String price;

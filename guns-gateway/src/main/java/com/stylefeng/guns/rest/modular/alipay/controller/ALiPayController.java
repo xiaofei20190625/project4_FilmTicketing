@@ -27,7 +27,7 @@ public class ALiPayController {
     post
     orderId
     */
-    @Reference(interfaceClass = AliPayService.class)
+    @Reference(interfaceClass = AliPayService.class, check = false)
     AliPayService aliPayService;
     @PostMapping("/getPayInfo")
     @ResponseBody

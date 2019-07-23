@@ -11,6 +11,7 @@ import java.io.Serializable;
  */
 @Data
 public class FilmInfo implements Serializable {
+   private static final long serialVersionUID = 1551718437561070579L;
    private String actors;
    private String filmCats;
    private String filmFields;

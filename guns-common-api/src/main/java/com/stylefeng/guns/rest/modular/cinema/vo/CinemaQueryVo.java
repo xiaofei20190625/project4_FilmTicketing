@@ -11,6 +11,7 @@ import java.io.Serializable;
  */
 @Data
 public class  CinemaQueryVo implements Serializable {
+    private static final long serialVersionUID = -8085164152707277266L;
     private Integer  brandId  = 99;
     private Integer  areaId = 99;
     private Integer  hallType = 99;

@@ -12,7 +12,7 @@ import com.stylefeng.guns.rest.modular.vo.ResponseVo;
 import io.jsonwebtoken.JwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,10 +28,12 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/order")
 @Slf4j
 public class OrderController {
+
     @Reference(interfaceClass = OrderService.class)
     OrderService orderService123;
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
+
     @RequestMapping(value = "buyTickets", params = {"fieldId", "soldSeats", "seatsName"}, method = RequestMethod.POST)
     public ResponseVo buyTickets(String fieldId, String soldSeats, String seatsName, HttpServletRequest request){
         //先判断传来的座位号是否是真实有效的
