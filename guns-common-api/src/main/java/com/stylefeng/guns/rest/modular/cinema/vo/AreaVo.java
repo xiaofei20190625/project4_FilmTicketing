@@ -11,6 +11,7 @@ import java.io.Serializable;
  */
 @Data
 public class AreaVo implements Serializable {
+    private static final long serialVersionUID = 537640613400040389L;
     private  String areaId;
     private  String areaName;
     private boolean isActive;

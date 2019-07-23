@@ -11,6 +11,7 @@ import java.io.Serializable;
  */
 @Data
 public class BrandVo implements Serializable {
+    private static final long serialVersionUID = 5598075764390694777L;
     private  String brandId;
     private  String brandName;
     private boolean isActive;

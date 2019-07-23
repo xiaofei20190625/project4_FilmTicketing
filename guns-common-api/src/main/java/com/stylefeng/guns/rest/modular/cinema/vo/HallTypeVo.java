@@ -11,6 +11,7 @@ import java.io.Serializable;
  */
 @Data
 public class HallTypeVo implements Serializable {
+    private static final long serialVersionUID = 4473029813829059018L;
     private  String halltypeId;
     private  String halltypeName;
     private boolean isActive;

@@ -11,10 +11,11 @@ import java.io.Serializable;
  */
 @Data
 public class CinemaInfo implements Serializable {
+    private static final long serialVersionUID = -3204293182266001224L;
     private  Integer cinemaId;
     private  String imgUrl = "cinema6.jpg";
     private  String cinemaName;
-    private  String cinemaAdress;
+    private  String cinemaAddress;
     private String cinemaPhone;
 
     public CinemaInfo() {
@@ -24,7 +25,7 @@ public class CinemaInfo implements Serializable {
         this.cinemaId = cinemaId;
         this.imgUrl = imgUrl;
         this.cinemaName = cinemaName;
-        this.cinemaAdress = cinemaAdress;
+        this.cinemaAddress = cinemaAdress;
         this.cinemaPhone = cinemaPhone;
     }
 /*

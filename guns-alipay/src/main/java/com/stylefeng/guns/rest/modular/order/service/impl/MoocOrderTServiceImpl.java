@@ -1,10 +1,11 @@
 package com.stylefeng.guns.rest.modular.order.service.impl;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.stylefeng.guns.rest.modular.order.model.MoocOrderT;
 import com.stylefeng.guns.rest.modular.order.dao.MoocOrderTMapper;
 import com.stylefeng.guns.rest.modular.order.service.IMoocOrderTService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
+
 
 /**
  * <p>

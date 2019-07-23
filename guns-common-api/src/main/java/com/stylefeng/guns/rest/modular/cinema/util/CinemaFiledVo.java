@@ -15,6 +15,7 @@ import java.util.List;
 
 @Data
 public class CinemaFiledVo implements Serializable {
+    private static final long serialVersionUID = 8158584191800398512L;
     private CinemaInfo cinemaInfo;
     private List<FilmList> filmList;
 }

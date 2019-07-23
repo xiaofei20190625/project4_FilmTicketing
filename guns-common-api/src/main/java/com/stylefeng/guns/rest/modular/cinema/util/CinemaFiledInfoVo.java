@@ -14,6 +14,7 @@ import java.io.Serializable;
  */
 @Data
 public class CinemaFiledInfoVo implements Serializable {
+    private static final long serialVersionUID = 8465181044820678164L;
     private CinemaInfo cinemaInfo;
     private HallInfoVo hallInfo;
     private FilmInfo filmInfo ;

@@ -13,6 +13,7 @@ import java.io.Serializable;
  */
 @Data
 public class FilmFields implements Serializable {
+    private static final long serialVersionUID = 6975171945926184619L;
     private  Integer fieldId ;
     private  String  beginTime  ;
     private  String endTime;

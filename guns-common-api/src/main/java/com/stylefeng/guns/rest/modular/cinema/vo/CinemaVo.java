@@ -11,15 +11,16 @@ import java.io.Serializable;
  */
 @Data
 public class CinemaVo implements Serializable {
+    private static final long serialVersionUID = -1812001007592031814L;
     private String uuid ;
     private String cinemaName ;
-    private String address;
+    private String cinemaAddress;
     private String minimumPrice;
 
     public CinemaVo(String uuid, String cinemaName, String address, String minimumPrice) {
         this.uuid = uuid;
         this.cinemaName = cinemaName;
-        this.address = address;
+        this.cinemaAddress = address;
         this.minimumPrice = minimumPrice;
     }
 
