@@ -40,10 +40,10 @@ spring:
       password: 123456
       filters: log4j,wall,mergeStat
 myoss:
-  bucket: hao6666
+  bucket: 修改自己的就可以
   endpoint: oss-cn-beijing.aliyuncs.com
-  access-key: LTAI6oEddMf9eVfL
-  secret: HHbUz1F4mo183rIdzxXk9GSkWeTHgl
+  access-key: 修改自己的就可以
+  secret: 修改自己的就可以
 logging:
   level.root: info
   level.com.stylefeng: debug
