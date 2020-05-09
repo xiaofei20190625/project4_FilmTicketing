@@ -56,14 +56,6 @@ public class MyOssClient {
        // 关闭OSSClient。//ossClient.shutdown();
     }
 
-    /*public static void main(String[] args) throws FileNotFoundException {
-
-        File targetFile = new File("D:/tmp", "qr-267cdea131974d108fc6038616265a3d.png");
-        InputStream inputStream = new FileInputStream(targetFile);
-        OSSClient ossClient = new OSSClient("oss-cn-beijing.aliyuncs.com", "LTAI6oEddMf9eVfL", "HHbUz1F4mo183rIdzxXk9GSkWeTHgl");
-        ossClient.putObject("hao6666", "qr-267cdea131974d108fc6038616265a3d.png", inputStream);
-        // 关闭OSSClient。
-        ossClient.shutdown();
-    }*/
+  
 
 }
